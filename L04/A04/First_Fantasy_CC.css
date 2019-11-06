@@ -1,0 +1,12 @@
+div {
+    display: inline-block;
+    width: 55%;
+}
+
+#dataField {
+    display: inline-block;
+    position: absolute;
+    top: 150px;
+    right: 10px;
+    width: 40%;
+}

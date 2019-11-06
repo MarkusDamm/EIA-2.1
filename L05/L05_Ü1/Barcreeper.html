@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barcreeper</title>
+    <!-- <link rel="stylesheet" href="./Drinks.css"> -->
+    <script src="./interfaces.js"></script>
+    <script src="./data.js"></script>
+    <script src="./Drinks.js"></script>
+</head>
+
+
+<body>
+    <h1>Drinks 24.de</h1>
+    <p>Best drinks (no Coffee)</p>
+    <form method="GET" id="form">
+        <div>
+            <h2>Choose here</h2>
+            <fieldset id="Drink">
+                <legend>Drink</legend>
+            </fieldset>
+
+            <fieldset id="Container">
+                <legend>Contianer</legend>
+            </fieldset>
+
+            <fieldset id="Extras">
+                <legend>Extras</legend>
+            </fieldset>
+
+            <fieldset>
+                <legend>Amount</legend>
+                <span id="slider">
+                    <span>
+                        0.1 L
+                        <input type="range" name="amount" min="0.1" max="1.0" step="0.1" value="0.5" id="amount">
+                        1.0 L
+                    </span>
+                    <progress max="1.0"></progress>
+                </span>
+            </fieldset>
+        </div>
+    </form>
+    <fieldset>
+        <h2>Your order</h2>
+        <div id="order">
+        </div>
+        <button type="button" form="form">Abschicken</button>
+        <button type="reset" form="form">Zurücksetzen</button>
+    </fieldset>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barcreeper</title>
+    <link rel="stylesheet" href="./Drinks.css">
+    <script src="./interfaces.js"></script>
+    <script src="./data.js"></script>
+    <script src="./Drinks.js"></script>
+</head>
+
+<body>
+    <h1>Drinks 24.de</h1>
+    <p>Best drinks (no Coffee)</p>
+    <form>
+        <div id="form">
+            <h2>Choose here</h2>
+            <fieldset id="Drink">
+                <legend>Drink</legend>
+                <!-- <select name="Drink">
+                    <option name="Drink" value="Mojito" price="24">Mojito</option>
+                    <option name="Drink" value="Zombie" price="29">Zombie</option>
+                    <option name="Drink" value="Bloody Mary" price="33.3">Bloody Mary</option>
+                    <option name="Drink" value="The Bob-Omb" price="17">The Bob-Omb</option>
+                </select> -->
+            </fieldset>
+
+            <fieldset id="Container">
+                <legend>Contianer</legend>
+                <!-- <input type="radio" name="Contianer" id="Slim" value="Slim" price="2">
+                <label for="Slim">Slim</label>
+                <input type="radio" name="Contianer" id="Wide" value="Wide" price="3">
+                <label for="Wide">Wide</label>
+                <input type="radio" name="Contianer" id="Paper" value="Paper" price="1">
+                <label for="Paper">Paper</label> -->
+            </fieldset>
+
+            <fieldset id="Extras">
+                <legend>Extras</legend>
+                <!-- <input type="checkbox" name="Ice" value="Ice" id="Ice" price="0.5">
+                <label for="Ice">Ice</label>
+                <input type="checkbox" name="Lemon" value="Lemon" id="Lemon" price="0.3">
+                <label for="Lemon">Lemon</label>
+                <input type="checkbox" name="Orange" value="Orange" id="Orange" price="0.3">
+                <label for="Orange">Orange</label>
+                <input type="checkbox" name="Mint" value="Mint" id="Mint" price="0.4">
+                <label for="Mint">Mint</label> -->
+            </fieldset>
+
+            <fieldset>
+                <legend>Amount</legend>
+                <span id="slider">
+                    <span>
+                        0.1 L
+                        <input type="range" name="amount" min="0.1" max="1.0" step="0.1" value="0.5" id="amount">
+                        1.0 L
+                    </span>
+                    <progress max="1.0"></progress>
+                </span>
+            </fieldset>
+        </div>
+    </form>
+    <div id="order">
+        <h2>Your order</h2>
+    </div>
+</body>
+
+</html>

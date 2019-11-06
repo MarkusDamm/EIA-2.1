@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>First Fantassy Character Creator</title>
+    <link rel="stylesheet" href="./First_Fantasy_CC.css">
+</head>
+<script src="First_Fantasy_CC.js"></script>
+
+<body>
+    <h1>First Fantassy Character Creator</h1>
+    <p>Fill out the form to create a new character</p>
+    <form>
+        <div id="form">
+            <h2>Choose here</h2>
+            <fieldset>
+                <legend>NAME</legend>
+                <input type="text" name="name" id="name">
+            </fieldset>
+
+            <fieldset>
+                <legend>Sex</legend>
+                <input type="radio" name="sex" id="male" value="male" price="2">
+                <label for="male">male</label>
+                <input type="radio" name="sex" id="female" value="female" price="3">
+                <label for="female">female</label>
+                <input type="radio" name="sex" id="divers" value="divers" price="1">
+                <label for="divers">divers</label>
+                <input type="radio" name="sex" id="apache" value="AA-Helicopter" price="1">
+                <label for="apache">apache attack helicopter</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Race</legend>
+                <select name="race" id="race">
+                    <option value="human">Human</option>
+                    <option value="goblin">Goblin</option>
+                    <option value="elf">Elf</option>
+                    <option value="tauren">Tauren</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Class</legend>
+                <select name="class" id="class">
+                    <option value="warrior">Warrior</option>
+                    <option value="shaman">Shaman</option>
+                    <option value="priest">Priest</option>
+                    <option value="paladin">Paladin</option>
+                    <option value="knight">Knight</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Height</legend>
+                <input type="number" min="130" max="210" value="170" name="height" id="height">
+            </fieldset>
+
+            <fieldset>
+                <legend>Weight</legend>
+                <span id="slider">
+                    <p id="weightText">Gewicht</p>
+                    <span>
+                        40 kg
+                        <input type="range" name="weight" min="40" max="200" step="1" value="70" id="weight">
+                        200 kg
+                    </span>
+                    <span id="bmi">BMI: </span>
+                    <!-- BMI = Gewicht: (Größe*Größe) -->
+                </span>
+            </fieldset>
+
+            <fieldset>
+                <legend>Weapons</legend>
+                <select name="weapons" id="weapons">
+                    <option value="Sword and Shield" weight="10">Sword and Shield</option>
+                    <option value="Battleaxe" weight="6">Battleaxe</option>
+                    <option value="Bow and Arrows" weight="3">Bow and Arrows</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Colors</legend>
+                <div>Eyecolor
+                <input type="color" name="eyecolor" placeholder="green" id="eyecolor" value="#00cc00">
+                </div>
+                <div>Haircolor
+                <input type="color" name="haircolor" placeholder="blue" id="haircolor" value="#0000ff">
+                </div>
+                <div>Cloth
+                <input type="color" name="clothcolor" placeholder="brown" id="clothcolor" value="#af7a09">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Hairstyle</legend>
+                <select name="hairstyle" id="hairstyle">
+                    <option name="hairstyle" value="Spiky">Spiky</option>
+                    <option name="hairstyle" value="Podhead">Podhead</option>
+                    <option name="hairstyle" value="Catears">Catears</option>
+                    <option name="hairstyle" value="Long">Long</option>
+                    <option name="hairstyle" value="Bold">Bold</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Accessories</legend>
+                <input type="radio" name="accessories" id="Bag" value="Bag" weight="1">
+                <label for="Bag">Bag</label>
+                <input type="radio" name="accessories" id="Bagback" value="Bagback" weight="2">
+                <label for="Bagback">Bagback</label>
+                <input type="radio" name="accessories" id="Lab Coat" value="Lab Coat" weight="0">
+                <label for="Lab Coat">Lab Coat</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Backstory</legend>
+                <textarea name="backstory" id="backstory" cols="80" rows="6"></textarea>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>Birthdate</legend>
+                <input type="date" name="birthdate" id="birthdate">
+                <span id="age">Age: </span>
+            </fieldset>
+
+            <fieldset>
+                <legend>Headwear</legend>
+                <input type="checkbox" name="beerhead" value="Beer helmet" id="Beer helmet" price="0.5">
+                <label for="Beer helmet">Beer helmet</label>
+                <input type="checkbox" name="megumin" value="Megumin" id="Megumin" price="0.3">
+                <label for="Megumin">Megumin</label>
+                <input type="checkbox" name="tophat" value="Top Hat" id="tophat" price="0.3">
+                <label for="tophat">Top Hat</label>
+                <input type="checkbox" name="pot" value="Pot" id="Pot" price="0.4">
+                <label for="Pot">Pot</label>
+                <input type="checkbox" name="driving Head" value="Driving Head" id="Driving Head" price="0.5">
+                <label for="Driving Head">Driving Head</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Alignment</legend>
+                <p>Moral</p>
+                <input type="radio" name="moral" id="goodMoral" value="Good">
+                <label for="goodMoral">Good</label>
+                <input type="radio" name="moral" id="neutralMoral" value="Neutral">
+                <label for="neutralMoral">Neutral</label>
+                <input type="radio" name="moral" id="evilMoral" value="Evil">
+                <label for="evilMoral">Evil</label>
+                <p>Ethical Alignment</p>
+                <input type="radio" name="ethical" id="lawful" value="Lawful">
+                <label for="lawful">Lawful</label>
+                <input type="radio" name="ethical" id="neutral" value="Neutral">
+                <label for="neutral">Neutral</label>
+                <input type="radio" name="ethical" id="chaotic" value="Chaotic">
+                <label for="chaotic">Chaotic</label>
+            </fieldset>
+
+        </div>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>
+    <!-- <div id="order">
+        <h2>Your order</h2>
+    </div> -->
+</body>
+
+</html>

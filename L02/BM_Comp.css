@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+    margin: 0 8px;
+}
+
+body {
+    text-align: center;
+    display: grid;
+    grid-template-rows: min-content min-content auto;
+}
+
+#letters {
+    font-size: 2em;
+    position: relative;
+    height: 35%;
+    background-color: white;
+    margin: 0 5px;
+}
+
+.alphabet {
+    font-size: 1em;
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    top: 10px;
+    margin: 0;
+}
+
+div {
+    border: thin solid black;
+    background-color: chartreuse;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+#mail {
+    margin-top: 0;
+    top: -150px;
+    height: 500;
+}
+
+.text {
+    font-size: 3em;
+    position: absolute;
+    border: thin dotted black;
+}
