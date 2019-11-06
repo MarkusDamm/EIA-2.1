@@ -6,11 +6,11 @@ var Barcreeper_05;
     let form;
     function handleLoad() {
         generateContent(Barcreeper_05.allData);
-        console.log(Barcreeper_05.allData);
-        console.log("All Data here");
+        // console.log(allData);
+        // console.log("All Data here");
         form = document.getElementById("form");
         let slider = document.getElementById("amount");
-        let submit = document.querySelector("button[type=button]");
+        let submit = document.querySelector("button[type=submit]");
         let reset = document.querySelector("button[type=reset]");
         if (!document.getElementsByTagName("div")[4])
             alert("Etwas scheint nicht zu stimmen");
@@ -20,6 +20,7 @@ var Barcreeper_05;
         reset.addEventListener("click", resetOrder);
     }
     async function sendOrder(_event) {
+        _event.preventDefault();
         let formData = new FormData(form);
         let query = new URLSearchParams(formData);
         console.log(query);

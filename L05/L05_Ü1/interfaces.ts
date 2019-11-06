@@ -9,9 +9,4 @@ namespace Barcreeper_05 {
         item: ItemData[];
 
     }
-
-    console.log(" ");
-
-    
-
 }

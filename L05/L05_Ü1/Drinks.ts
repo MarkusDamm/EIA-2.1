@@ -5,12 +5,12 @@ namespace Barcreeper_05 {
 
     function handleLoad(): void {
         generateContent(allData);
-        console.log(allData);
-        console.log("All Data here");
+        // console.log(allData);
+        // console.log("All Data here");
 
         form = <HTMLFormElement>document.getElementById("form");
         let slider: HTMLInputElement = <HTMLInputElement>document.getElementById("amount");
-        let submit: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=button]");
+        let submit: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=submit]");
         let reset: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=reset]");
 
         if (!document.getElementsByTagName("div")[4])
@@ -23,6 +23,7 @@ namespace Barcreeper_05 {
     }
 
     async function sendOrder(_event: Event): Promise<void> {
+        _event.preventDefault();
         let formData: FormData = new FormData(form);
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         console.log(query);
