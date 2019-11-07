@@ -3,8 +3,13 @@ namespace Barcreeper_05 {
     let amount: number = 0.5;
     let form: HTMLFormElement;
 
-    function handleLoad(): void {
-        generateContent(allData);
+    async function handleLoad(): Promise<void> {
+
+        let response: Response = await fetch("Data.json");
+        let offer: string = await response.text();
+        let data: SystemData = JSON.parse(offer);
+
+        generateContent(data);
         // console.log(allData);
         // console.log("All Data here");
 
@@ -36,11 +41,10 @@ namespace Barcreeper_05 {
         order.innerText = "";
     }
 
-    function generateContent(_data: SystemData[]): void {
-        let i: number = 0;
+    function generateContent(_data: SystemData): void {
         for (let category in _data) {
-            category = _data[i].category;
-            let items: ItemData[] = _data[i].item;
+            // category = _data[i].category;
+            let items: ItemData[] = _data[category];
             let group: HTMLDivElement = document.createElement("div");
 
             if (category == "Drink")
@@ -54,9 +58,7 @@ namespace Barcreeper_05 {
 
             let fieldset: HTMLFieldSetElement = <HTMLFieldSetElement>document.getElementById(category);
             fieldset.appendChild(group);
-            i++;
         }
-
     }
 
     function createSelect(_items: ItemData[], _category: string): HTMLDivElement {

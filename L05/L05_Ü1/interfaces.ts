@@ -5,8 +5,6 @@ namespace Barcreeper_05 {
     }
 
     export interface SystemData {
-        category: string;
-        item: ItemData[];
-
+        [category: string]: ItemData[];
     }
 }

@@ -4,8 +4,11 @@ var Barcreeper_05;
     window.addEventListener("load", handleLoad);
     let amount = 0.5;
     let form;
-    function handleLoad() {
-        generateContent(Barcreeper_05.allData);
+    async function handleLoad() {
+        let response = await fetch("Data.json");
+        let offer = await response.text();
+        let data = JSON.parse(offer);
+        generateContent(data);
         // console.log(allData);
         // console.log("All Data here");
         form = document.getElementById("form");
@@ -32,10 +35,9 @@ var Barcreeper_05;
         order.innerText = "";
     }
     function generateContent(_data) {
-        let i = 0;
         for (let category in _data) {
-            category = _data[i].category;
-            let items = _data[i].item;
+            // category = _data[i].category;
+            let items = _data[category];
             let group = document.createElement("div");
             if (category == "Drink")
                 group = createSelect(items, category);
@@ -45,7 +47,6 @@ var Barcreeper_05;
                 group = createCheckbox(items, category);
             let fieldset = document.getElementById(category);
             fieldset.appendChild(group);
-            i++;
         }
     }
     function createSelect(_items, _category) {
