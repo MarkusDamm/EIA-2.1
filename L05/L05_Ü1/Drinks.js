@@ -21,6 +21,7 @@ var Barcreeper_05;
         slider.addEventListener("input", displayAmount);
         submit.addEventListener("click", sendOrder);
         reset.addEventListener("click", resetOrder);
+        displayAmount();
     }
     async function sendOrder(_event) {
         _event.preventDefault();
@@ -33,6 +34,7 @@ var Barcreeper_05;
     function resetOrder(_event) {
         let order = document.getElementById("order");
         order.innerText = "";
+        setTimeout(displayAmount, 50);
     }
     function generateContent(_data) {
         for (let category in _data) {
@@ -128,7 +130,13 @@ var Barcreeper_05;
         order.innerHTML = htmlText;
     }
     function displayAmount(_event) {
-        amount = parseFloat(_event.target.value);
+        if (_event)
+            amount = parseFloat(_event.target.value);
+        else {
+            let slider = document.getElementById("amount");
+            amount = Number(slider.value);
+            console.log(amount);
+        }
         let progress = document.getElementsByTagName("progress")[0];
         console.log("Update Progress");
         progress.value = amount;
