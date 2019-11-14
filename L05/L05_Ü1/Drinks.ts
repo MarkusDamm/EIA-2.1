@@ -122,9 +122,7 @@ namespace Barcreeper_05 {
             label.setAttribute("for", item.itemName);
             label.innerText = item.itemName;
             group.appendChild(label);
-
         }
-
         return group;
     }
 
@@ -173,5 +171,4 @@ namespace Barcreeper_05 {
         console.log("Update Progress");
         progress.value = amount;
     }
-
 }

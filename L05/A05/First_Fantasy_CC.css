@@ -1,0 +1,12 @@
+form {
+    display: inline-block;
+    width: 55%;
+}
+
+#dataField {
+    display: block;
+    position: absolute;
+    top: 180px;
+    right: 10px;
+    width: 40%;
+}
