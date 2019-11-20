@@ -4,7 +4,8 @@ var Barcreeper_06;
     window.addEventListener("load", handleLoad);
     let amount = 0.5;
     let form;
-    let url = "http://localhost:5001/";
+    // let url: string = "http://localhost:5001/";
+    let url = "https://fuwa-eia2-1.herokuapp.com/";
     async function handleLoad() {
         let response = await fetch("Data.json");
         let offer = await response.text();

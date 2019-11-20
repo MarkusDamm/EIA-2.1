@@ -2,7 +2,8 @@ namespace Barcreeper_06 {
     window.addEventListener("load", handleLoad);
     let amount: number = 0.5;
     let form: HTMLFormElement;
-    let url: string = "http://localhost:5001/";
+    // let url: string = "http://localhost:5001/";
+    let url: string = "https://fuwa-eia2-1.herokuapp.com/";
 
     async function handleLoad(): Promise<void> {
 
