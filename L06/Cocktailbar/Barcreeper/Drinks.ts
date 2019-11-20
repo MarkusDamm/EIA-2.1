@@ -6,7 +6,6 @@ namespace Barcreeper_06 {
     let url: string = "https://fuwa-eia2-1.herokuapp.com/";
 
     async function handleLoad(): Promise<void> {
-
         let response: Response = await fetch("Data.json");
         let offer: string = await response.text();
         let data: SystemData = JSON.parse(offer);

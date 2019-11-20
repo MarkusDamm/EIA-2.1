@@ -1,0 +1,186 @@
+{
+    "Name": {
+        "type": "text",
+        "name": "name"
+    },
+    "Sex": {
+        "type": "radio",
+        "name": "sex",
+        "content": [
+            "male",
+            "female",
+            "divers",
+            "apache"
+        ]
+    },
+    "Race": {
+        "type": "select",
+        "name": "race",
+        "content": [
+            "Human",
+            "Orc",
+            "Elf",
+            "Tauren",
+            "Gnome",
+            "Felyne"
+        ]
+    },
+    "Class": {
+        "type": "select",
+        "name": "class",
+        "content": [
+            "Warrior",
+            "Shaman",
+            "Bard",
+            "Dragonknight",
+            "Paladin"
+        ]
+    },
+    "Height": {
+        "type": "number",
+        "name": "height",
+        "attributes": [
+            {
+                "key": "min",
+                "value": "130"
+            },
+            {
+                "key": "max",
+                "value": "210"
+            },
+            {
+                "key": "value",
+                "value": "170"
+            }
+        ]
+    },
+    "Weight": {
+        "type": "range",
+        "name": "weight",
+        "attributes": [
+            {
+                "key": "min",
+                "value": "40"
+            },
+            {
+                "key": "max",
+                "value": "180"
+            },
+            {
+                "key": "value",
+                "value": "70"
+            },
+            {
+                "key": "step",
+                "value": "1"
+            }
+        ]
+    },
+    "Weapons": {
+        "type": "select",
+        "name": "weapons",
+        "content": [
+            "Sword and Shield",
+            "Greatsword",
+            "Bow",
+            "Daggers",
+            "Mace"
+        ]
+    },
+    "Eyecolor": {
+        "type": "color",
+        "name": "eyecolor",
+        "attributes": [
+            {
+                "key": "value",
+                "value": "#00cc00"
+            }
+        ]
+    },
+    "Haircolor": {
+        "type": "color",
+        "name": "haircolor",
+        "attributes": [
+            {
+                "key": "value",
+                "value": "#0000ff"
+            }
+        ]
+    },
+    "Clothcolor": {
+        "type": "color",
+        "name": "clothcolor",
+        "attributes": [
+            {
+                "key": "value",
+                "value": "#af7a09"
+            }
+        ]
+    },
+    "Hairstyle": {
+        "type": "select",
+        "name": "hairstyle",
+        "content": [
+            "Spiky",
+            "Long",
+            "Catears",
+            "Podhead",
+            "Bold"
+        ]
+    },
+    "Accessories": {
+        "type": "radio",
+        "name": "accessories",
+        "content": [
+            "Bag",
+            "Backbag",
+            "Lab Coat"
+        ]
+    },
+    "Backstory": {
+        "type": "textarea",
+        "name": "backstory",
+        "attributes": [
+            {
+                "key": "cols",
+                "value": "80"
+            },
+            {
+                "key": "rows",
+                "value": "6"
+            }
+        ]
+    },
+    "Birthdate": {
+        "type": "date",
+        "name": "birthdate"
+    },
+    "Headwear": {
+        "type": "checkbox",
+        "name": "Headwear",
+        "content": [
+            "Beer helmet",
+            "Top hat",
+            "Pot",
+            "Driving head"
+        ]
+    },
+    "Moral": {
+        "type": "radio",
+        "name": "moral",
+        "content": [
+            "Good",
+            "Neutral",
+            "Evil"
+        ]
+    },
+    "Ethics": {
+        "type": "radio",
+        "name": "ethical",
+        "content": [
+            "Lawful",
+            "Ethical Neutral",
+            "Chaotic"
+        ]
+    }
+}
