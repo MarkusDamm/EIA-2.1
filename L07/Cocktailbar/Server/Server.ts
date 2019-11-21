@@ -1,10 +1,10 @@
 import * as Http from "http";
 import * as Url from "url";
-// import * as Mongo from "mongodb";
+import * as Mongo from "mongodb";
 
-export namespace L06_CocktailBar {
+export namespace L07_CocktailBar {
     let server: Http.Server;
-    // let orders: Mongo.Collection;
+    let orders: Mongo.Collection;
 
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
@@ -12,8 +12,8 @@ export namespace L06_CocktailBar {
     startServer(port);
     console.log("Server starting on port: " + port);
 
-    // let databaseURL: string = "mongodb://localhos:27017";
-    // connectToDatabase(databaseURL);
+    let databaseURL: string = "mongodb://localhos:27017";
+    connectToDatabase(databaseURL);
 
     function startServer(_port: number | string): void {
         server = Http.createServer();
@@ -22,9 +22,9 @@ export namespace L06_CocktailBar {
     
     }
 
-    // function connectToDatabase(_url: string): void {
-    //     let mongoClient: Mongo.MongoClient;
-    // }
+    function connectToDatabase(_url: string): void {
+        
+    }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("What's up?");
@@ -43,7 +43,7 @@ export namespace L06_CocktailBar {
         _response.end();
     }
 
-    // function storeOrder(_order: string): void {
-    //     orders.insert(_order);
+    function storeOrder(_order: string): void {
+        orders.insert(_order);
     }
 }

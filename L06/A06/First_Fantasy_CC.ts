@@ -9,7 +9,6 @@ namespace FirstFantasy_6 {
 
     let url: string = "https://fuwa-eia2-1.herokuapp.com/";
 
-
     async function init(): Promise<void> {
         let response: Response = await fetch("Fantasy_Data.json");
         let offer: string = await response.text();

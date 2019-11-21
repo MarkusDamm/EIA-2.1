@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@types/mongodb": "^3.3.11",
+    "mongodb": "^3.3.4"
+  },
   "devDependencies": {},
   "scripts": {
     "start": "node ./L06/Cocktailbar/Server/Server.js"
