@@ -26,7 +26,7 @@ var L06_CocktailBar;
         let query = new URLSearchParams(formData);
         let response = await fetch(url + "?" + query.toString());
         let responseText = await response.text();
-        alert(response);
+        alert(responseText);
     }
     function handleChange(_event) {
         displayOrder();

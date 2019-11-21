@@ -2,15 +2,26 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
 const Url = require("url");
+// import * as Mongo from "mongodb";
 var L06_CocktailBar;
 (function (L06_CocktailBar) {
-    let server = Http.createServer();
+    let server;
+    // let orders: Mongo.Collection;
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
+    startServer(port);
     console.log("Server starting on port: " + port);
-    server.listen(port);
-    server.addListener("request", handleRequest);
+    // let databaseURL: string = "mongodb://localhos:27017";
+    // connectToDatabase(databaseURL);
+    function startServer(_port) {
+        server = Http.createServer();
+        server.listen(_port);
+        server.addListener("request", handleRequest);
+    }
+    // function connectToDatabase(_url: string): void {
+    //     let mongoClient: Mongo.MongoClient;
+    // }
     function handleRequest(_request, _response) {
         console.log("What's up?");
         _response.setHeader("content-type", "text/html; charset=utf-8");
@@ -25,5 +36,8 @@ var L06_CocktailBar;
         }
         _response.end();
     }
+    // function storeOrder(_order: string): void {
+    //     orders.insert(_order);
+    // }
 })(L06_CocktailBar = exports.L06_CocktailBar || (exports.L06_CocktailBar = {}));
 //# sourceMappingURL=Server.js.map

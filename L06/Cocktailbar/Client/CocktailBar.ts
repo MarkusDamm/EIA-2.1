@@ -31,7 +31,7 @@ namespace L06_CocktailBar {
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         let response: Response = await fetch(url + "?" + query.toString());
         let responseText: string = await response.text();
-        alert(response);
+        alert(responseText);
     }
 
     function handleChange(_event: Event): void {

@@ -1,6 +1,6 @@
 "use strict";
-var L06_CocktailBar;
-(function (L06_CocktailBar) {
+var L07_CocktailBar;
+(function (L07_CocktailBar) {
     function generateContent(_data) {
         for (let category in _data) {
             // console.log(category);
@@ -24,7 +24,7 @@ var L06_CocktailBar;
                 fieldset.appendChild(group);
         }
     }
-    L06_CocktailBar.generateContent = generateContent;
+    L07_CocktailBar.generateContent = generateContent;
     function createSelect(_items, _category) {
         let group = document.createElement("select");
         group.name = _category;
@@ -71,5 +71,5 @@ var L06_CocktailBar;
         }
         return group;
     }
-})(L06_CocktailBar || (L06_CocktailBar = {}));
+})(L07_CocktailBar || (L07_CocktailBar = {}));
 //# sourceMappingURL=GenerateContent.js.map

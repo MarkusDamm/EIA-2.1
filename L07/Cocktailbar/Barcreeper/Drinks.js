@@ -1,11 +1,11 @@
 "use strict";
-var Barcreeper_06;
-(function (Barcreeper_06) {
+var Barcreeper_07;
+(function (Barcreeper_07) {
     window.addEventListener("load", handleLoad);
     let amount = 0.5;
     let form;
-    // let url: string = "http://localhost:5001/";
-    let url = "https://fuwa-eia2-1.herokuapp.com/";
+    let url = "http://localhost:5001/";
+    // let url: string = "https://fuwa-eia2-1.herokuapp.com/";
     async function handleLoad() {
         let response = await fetch("Data.json");
         let offer = await response.text();
@@ -144,5 +144,5 @@ var Barcreeper_06;
         console.log("Update Progress");
         progress.value = amount;
     }
-})(Barcreeper_06 || (Barcreeper_06 = {}));
+})(Barcreeper_07 || (Barcreeper_07 = {}));
 //# sourceMappingURL=Drinks.js.map

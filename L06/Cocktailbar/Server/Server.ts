@@ -45,5 +45,5 @@ export namespace L06_CocktailBar {
 
     // function storeOrder(_order: string): void {
     //     orders.insert(_order);
-    }
+    // }
 }

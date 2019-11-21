@@ -2,28 +2,35 @@ import * as Http from "http";
 import * as Url from "url";
 import * as Mongo from "mongodb";
 
-export namespace L07_CocktailBar {
-    let server: Http.Server;
-    let orders: Mongo.Collection;
+export namespace L07_CocktailBar {   
+    interface Order {
+        [type: string]: string | string[];
+    }
 
+    let orders: Mongo.Collection;
+    
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
         port = 5001;
+
     startServer(port);
     console.log("Server starting on port: " + port);
-
-    let databaseURL: string = "mongodb://localhos:27017";
+    
+    let databaseURL: string = "mongodb://localhost:27017";
     connectToDatabase(databaseURL);
-
+    
     function startServer(_port: number | string): void {
-        server = Http.createServer();
+        let server: Http.Server = Http.createServer();
         server.listen(_port);
         server.addListener("request", handleRequest);
-    
     }
 
-    function connectToDatabase(_url: string): void {
-        
+    async function connectToDatabase(_url: string): Promise<void> {
+        let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        orders = mongoClient.db("Cocktailbar").collection("Orders");
+        console.log("Database connection is ", orders != undefined);
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
@@ -39,11 +46,13 @@ export namespace L07_CocktailBar {
             // }
             let jsonString: string = JSON.stringify(url.query);
             _response.write(jsonString);
+            storeOrder(url.query);
+            console.log(jsonString);
         }
         _response.end();
     }
 
-    function storeOrder(_order: string): void {
+    function storeOrder(_order: Order): void {
         orders.insert(_order);
     }
 }
