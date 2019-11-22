@@ -43,9 +43,11 @@ var L07_CocktailBar;
             //     _response.write(key + ":" + url.query[key] + "<br/>");
             // }
             if (url.query["command"] == "retrieve") {
+                console.log("Trying to show orders");
                 _response.write(retrieveOrders());
             }
             else {
+                console.log("urlQuery: ", url.query);
                 let jsonString = JSON.stringify(url.query);
                 _response.write(jsonString);
                 storeOrder(url.query);

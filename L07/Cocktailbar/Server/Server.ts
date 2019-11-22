@@ -55,8 +55,10 @@ export namespace L07_CocktailBar {
             // }
 
             if (url.query["command"] == "retrieve") {
+                console.log("Trying to show orders");
                 _response.write(retrieveOrders());
             } else {
+                console.log("urlQuery: ", url.query);
                 let jsonString: string = JSON.stringify(url.query);
                 _response.write(jsonString);
                 storeOrder(url.query);
