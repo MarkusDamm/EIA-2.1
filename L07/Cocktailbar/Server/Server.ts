@@ -6,9 +6,16 @@ export namespace L07_CocktailBar {
     interface Order {
         [type: string]: string | string[];
     }
-
     let orders: Mongo.Collection;
-    
+    let databaseURL: string;
+
+    if (process.argv[2] == "remote") {
+        databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";
+    }
+    else {
+        databaseURL = "mongodb://localhost:27017";
+    }
+
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
         port = 5001;
@@ -16,7 +23,6 @@ export namespace L07_CocktailBar {
     startServer(port);
     console.log("Server starting on port: " + port);
     
-    let databaseURL: string = "mongodb://localhost:27017";
     connectToDatabase(databaseURL);
     
     function startServer(_port: number | string): void {

@@ -6,12 +6,18 @@ const Mongo = require("mongodb");
 var L07_CocktailBar;
 (function (L07_CocktailBar) {
     let orders;
+    let databaseURL;
+    if (process.argv[2] == "remote") {
+        databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";
+    }
+    else {
+        databaseURL = "mongodb://localhost:27017";
+    }
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
     startServer(port);
     console.log("Server starting on port: " + port);
-    let databaseURL = "mongodb://localhost:27017";
     connectToDatabase(databaseURL);
     function startServer(_port) {
         let server = Http.createServer();

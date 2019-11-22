@@ -7,6 +7,7 @@ var FirstFantasy_6;
     let heigth;
     let bmi;
     let form;
+    // let url: string = "http://localhost:5001/";
     let url = "https://fuwa-eia2-1.herokuapp.com/";
     async function init() {
         let response = await fetch("Fantasy_Data.json");

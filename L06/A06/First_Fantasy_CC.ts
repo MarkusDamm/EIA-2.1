@@ -5,15 +5,16 @@ namespace FirstFantasy_6 {
     let weight: number;
     let heigth: number;
     let bmi: number;
-    let form: HTMLFormElement;   
+    let form: HTMLFormElement;
 
+    // let url: string = "http://localhost:5001/";
     let url: string = "https://fuwa-eia2-1.herokuapp.com/";
 
     async function init(): Promise<void> {
         let response: Response = await fetch("Fantasy_Data.json");
         let offer: string = await response.text();
         let data: Property[] = JSON.parse(offer);
- 
+
         generateContent(data);
         form = <HTMLFormElement>document.querySelector("form[id=form]");
         let slider: HTMLInputElement = <HTMLInputElement>document.querySelector("[type=range]");
@@ -21,7 +22,7 @@ namespace FirstFantasy_6 {
         heigth = parseInt((<HTMLInputElement>document.getElementById("height")).value);
         form.addEventListener("change", handleChange);
         slider.addEventListener("input", handleInput);
- 
+
         let submit: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=submit]");
         let reset: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=reset]");
 
@@ -151,7 +152,7 @@ namespace FirstFantasy_6 {
         }
     }
 
-    function createSingle (_container: Container, _name: string): HTMLElement {
+    function createSingle(_container: Container, _name: string): HTMLElement {
         console.log(_container);
         let fieldset: HTMLFieldSetElement = document.createElement("fieldset");
         let legend: HTMLLegendElement = document.createElement("legend");
@@ -161,9 +162,9 @@ namespace FirstFantasy_6 {
         entry.type = _container.type;
         entry.name = _container.name;
         entry.id = _container.name;
-        for (let i: number = 0; _container.attributes && i < _container.attributes.length; i++) 
+        for (let i: number = 0; _container.attributes && i < _container.attributes.length; i++)
             entry.setAttribute(_container.attributes[i].key, _container.attributes[i].value);
-        
+
         fieldset.appendChild(entry);
         return fieldset;
     }
@@ -198,9 +199,9 @@ namespace FirstFantasy_6 {
         tArea.name = _container.name;
         tArea.id = _container.name;
 
-        for (let i: number = 0; _container.attributes && i < _container.attributes.length; i++) 
+        for (let i: number = 0; _container.attributes && i < _container.attributes.length; i++)
             tArea.setAttribute(_container.attributes[i].key, _container.attributes[i].value);
-        
+
         fieldset.appendChild(tArea);
         return fieldset;
     }
@@ -225,7 +226,7 @@ namespace FirstFantasy_6 {
         fieldset.appendChild(select);
         return fieldset;
     }
-    
+
     async function sendOrder(_event: Event): Promise<void> {
         _event.preventDefault();
         let formData: FormData = new FormData(form);
