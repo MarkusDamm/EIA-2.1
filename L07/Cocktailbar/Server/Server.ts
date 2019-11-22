@@ -69,8 +69,9 @@ export namespace L07_CocktailBar {
     }
 
     async function retrieveOrders(): Promise<any[]> {
-        let cursor: Mongo.Cursor = orders.find();
-        console.log(cursor.toArray());
+        console.log("Asking DB about Orders");
+        let cursor: Mongo.Cursor = await orders.find();
+        console.log(await cursor.toArray());
         return cursor.toArray(); 
     }
 

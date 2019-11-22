@@ -57,8 +57,9 @@ var L07_CocktailBar;
         _response.end();
     }
     async function retrieveOrders() {
-        let cursor = orders.find();
-        console.log(cursor.toArray());
+        console.log("Asking DB about Orders");
+        let cursor = await orders.find();
+        console.log(await cursor.toArray());
         return cursor.toArray();
     }
     function storeOrder(_order) {
