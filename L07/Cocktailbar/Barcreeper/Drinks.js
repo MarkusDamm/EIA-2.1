@@ -17,12 +17,14 @@ var Barcreeper_07;
         let slider = document.getElementById("amount");
         let submit = document.querySelector("button[type=submit]");
         let reset = document.querySelector("button[type=reset]");
+        let report = document.querySelector("button[type=report]");
         if (!document.getElementsByTagName("div")[4])
             alert("Etwas scheint nicht zu stimmen");
         form.addEventListener("change", handleChange);
         slider.addEventListener("input", displayAmount);
         submit.addEventListener("click", sendOrder);
         reset.addEventListener("click", resetOrder);
+        report.addEventListener("click", reportOrders);
         displayAmount();
     }
     async function sendOrder(_event) {
@@ -38,6 +40,13 @@ var Barcreeper_07;
         let order = document.getElementById("order");
         order.innerText = "";
         setTimeout(displayAmount, 50);
+    }
+    async function reportOrders(_event) {
+        console.log("Trying to report Orders");
+        let query = "command=retrieve";
+        let response = await fetch(url + "?" + query);
+        let responseText = await response.text();
+        alert(responseText);
     }
     function generateContent(_data) {
         for (let category in _data) {

@@ -2,12 +2,15 @@ import * as Http from "http";
 import * as Url from "url";
 import * as Mongo from "mongodb";
 
-export namespace L07_CocktailBar {   
+export namespace L07_CocktailBar {
     interface Order {
         [type: string]: string | string[];
     }
     let orders: Mongo.Collection;
     let databaseURL: string;
+
+    let dbName: string = "Cocktailbar";
+    let dbCollection: string = "Orders";
 
     if (process.argv[2] == "remote") {
         databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";
@@ -22,9 +25,9 @@ export namespace L07_CocktailBar {
 
     startServer(port);
     console.log("Server starting on port: " + port);
-    
+
     connectToDatabase(databaseURL);
-    
+
     function startServer(_port: number | string): void {
         let server: Http.Server = Http.createServer();
         server.listen(_port);
@@ -32,10 +35,10 @@ export namespace L07_CocktailBar {
     }
 
     async function connectToDatabase(_url: string): Promise<void> {
-        let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db("Cocktailbar").collection("Orders");
+        orders = mongoClient.db(dbName).collection(dbCollection);
         console.log("Database connection is ", orders != undefined);
     }
 
@@ -50,12 +53,23 @@ export namespace L07_CocktailBar {
             // for (let key in url.query) {
             //     _response.write(key + ":" + url.query[key] + "<br/>");
             // }
-            let jsonString: string = JSON.stringify(url.query);
-            _response.write(jsonString);
-            storeOrder(url.query);
-            console.log(jsonString);
+
+            if (url.query["command"] == "retrieve") {
+                _response.write(retrieveOrders());
+            } else {
+                let jsonString: string = JSON.stringify(url.query);
+                _response.write(jsonString);
+                storeOrder(url.query);
+                console.log(jsonString);
+            }
         }
         _response.end();
+    }
+
+    async function retrieveOrders(): Promise<any[]> {
+        let cursor: Mongo.Cursor = orders.find();
+        console.log(cursor.toArray());
+        return cursor.toArray(); 
     }
 
     function storeOrder(_order: Order): void {

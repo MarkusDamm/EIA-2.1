@@ -18,6 +18,7 @@ namespace Barcreeper_07 {
         let slider: HTMLInputElement = <HTMLInputElement>document.getElementById("amount");
         let submit: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=submit]");
         let reset: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=reset]");
+        let report: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=report]");
 
         if (!document.getElementsByTagName("div")[4])
             alert("Etwas scheint nicht zu stimmen");
@@ -26,6 +27,7 @@ namespace Barcreeper_07 {
         slider.addEventListener("input", displayAmount);
         submit.addEventListener("click", sendOrder);
         reset.addEventListener("click", resetOrder);
+        report.addEventListener("click", reportOrders);
         displayAmount(); 
     }
 
@@ -44,6 +46,15 @@ namespace Barcreeper_07 {
         let order: HTMLDivElement = <HTMLDivElement>document.getElementById("order");
         order.innerText = "";
         setTimeout(displayAmount, 50);
+    }
+
+    async function reportOrders(_event: Event): Promise<void> {
+        console.log("Trying to report Orders");
+        let query: string = "command=retrieve";
+        let response: Response = await fetch(url + "?" + query);
+        let responseText: string = await response.text();
+
+        alert(responseText);
     }
 
     function generateContent(_data: SystemData): void {

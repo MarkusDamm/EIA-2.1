@@ -7,6 +7,8 @@ var L07_CocktailBar;
 (function (L07_CocktailBar) {
     let orders;
     let databaseURL;
+    let dbName = "Cocktailbar";
+    let dbCollection = "Orders";
     if (process.argv[2] == "remote") {
         databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";
     }
@@ -28,7 +30,7 @@ var L07_CocktailBar;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db("Cocktailbar").collection("Orders");
+        orders = mongoClient.db(dbName).collection(dbCollection);
         console.log("Database connection is ", orders != undefined);
     }
     function handleRequest(_request, _response) {
@@ -40,12 +42,22 @@ var L07_CocktailBar;
             // for (let key in url.query) {
             //     _response.write(key + ":" + url.query[key] + "<br/>");
             // }
-            let jsonString = JSON.stringify(url.query);
-            _response.write(jsonString);
-            storeOrder(url.query);
-            console.log(jsonString);
+            if (url.query["command"] == "retrieve") {
+                _response.write(retrieveOrders());
+            }
+            else {
+                let jsonString = JSON.stringify(url.query);
+                _response.write(jsonString);
+                storeOrder(url.query);
+                console.log(jsonString);
+            }
         }
         _response.end();
+    }
+    async function retrieveOrders() {
+        let cursor = orders.find();
+        console.log(cursor.toArray());
+        return cursor.toArray();
     }
     function storeOrder(_order) {
         orders.insert(_order);
