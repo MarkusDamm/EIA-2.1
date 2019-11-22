@@ -2,8 +2,8 @@ namespace Barcreeper_07 {
     window.addEventListener("load", handleLoad);
     let amount: number = 0.5;
     let form: HTMLFormElement;
-    // let url: string = "http://localhost:5001/";
-    let url: string = "https://fuwa-eia2-1.herokuapp.com/";
+    let url: string = "http://localhost:5001/";
+    // let url: string = "https://fuwa-eia2-1.herokuapp.com/";
 
     async function handleLoad(): Promise<void> {
         let response: Response = await fetch("Data.json");
@@ -55,6 +55,8 @@ namespace Barcreeper_07 {
         let responseText: string = await response.text();
 
         alert(responseText);
+        let orders: HTMLDivElement = <HTMLDivElement>document.querySelector("div#orders");
+        orders.innerText = responseText;
     }
 
     function generateContent(_data: SystemData): void {

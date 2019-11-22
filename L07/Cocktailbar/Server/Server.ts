@@ -42,7 +42,7 @@ export namespace L07_CocktailBar {
         console.log("Database connection is ", orders != undefined);
     }
 
-    function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
+    async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
         console.log("What's up?");
 
         _response.setHeader("content-type", "text/html; charset=utf-8");
@@ -55,9 +55,11 @@ export namespace L07_CocktailBar {
             // }
 
             if (url.query["command"] == "retrieve") {
-                let report: Promise<string> = retrieveOrders();
-                if (report)
+                let report: any[] | string = await retrieveOrders();
+                if (report == "We encountered tecnical problems. Please try again later")
                     _response.write(report);
+                else
+                    _response.write(JSON.stringify(report));
             } else {
                 console.log("urlQuery: ", url.query);
                 let jsonString: string = JSON.stringify(url.query);
@@ -69,11 +71,16 @@ export namespace L07_CocktailBar {
         _response.end();
     }
 
-    async function retrieveOrders(): Promise<string> {
-        console.log("Asking DB about Orders");
+    async function retrieveOrders(): Promise<any[] | string> {
+        // console.log("Asking DB about Orders ", orders.find());
         let cursor: Mongo.Cursor = await orders.find();
-        console.log(await cursor.toString());
-        return cursor.toString(); 
+        let answer: Promise<any[]> = await cursor.toArray();
+        console.log("DB CursorToArray", answer);
+        if (answer != null) {
+            return answer;
+        }
+        else 
+            return "We encountered tecnical problems. Please try again later";
     }
 
     function storeOrder(_order: Order): void {

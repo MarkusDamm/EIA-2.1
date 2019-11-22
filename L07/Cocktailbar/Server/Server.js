@@ -33,7 +33,7 @@ var L07_CocktailBar;
         orders = mongoClient.db(dbName).collection(dbCollection);
         console.log("Database connection is ", orders != undefined);
     }
-    function handleRequest(_request, _response) {
+    async function handleRequest(_request, _response) {
         console.log("What's up?");
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
@@ -43,9 +43,11 @@ var L07_CocktailBar;
             //     _response.write(key + ":" + url.query[key] + "<br/>");
             // }
             if (url.query["command"] == "retrieve") {
-                let report = retrieveOrders();
-                if (report)
+                let report = await retrieveOrders();
+                if (report == "We encountered tecnical problems. Please try again later")
                     _response.write(report);
+                else
+                    _response.write(JSON.stringify(report));
             }
             else {
                 console.log("urlQuery: ", url.query);
@@ -58,10 +60,15 @@ var L07_CocktailBar;
         _response.end();
     }
     async function retrieveOrders() {
-        console.log("Asking DB about Orders");
+        // console.log("Asking DB about Orders ", orders.find());
         let cursor = await orders.find();
-        console.log(await cursor.toString());
-        return cursor.toString();
+        let answer = await cursor.toArray();
+        console.log("DB CursorToArray", answer);
+        if (answer != null) {
+            return answer;
+        }
+        else
+            return "We encountered tecnical problems. Please try again later";
     }
     function storeOrder(_order) {
         orders.insert(_order);
