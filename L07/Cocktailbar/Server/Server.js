@@ -43,8 +43,9 @@ var L07_CocktailBar;
             //     _response.write(key + ":" + url.query[key] + "<br/>");
             // }
             if (url.query["command"] == "retrieve") {
-                console.log("Trying to show orders");
-                _response.write(retrieveOrders());
+                let report = retrieveOrders();
+                if (report)
+                    _response.write(report);
             }
             else {
                 console.log("urlQuery: ", url.query);
@@ -59,8 +60,8 @@ var L07_CocktailBar;
     async function retrieveOrders() {
         console.log("Asking DB about Orders");
         let cursor = await orders.find();
-        console.log(await cursor.toArray());
-        return cursor.toArray();
+        console.log(await cursor.toString());
+        return cursor.toString();
     }
     function storeOrder(_order) {
         orders.insert(_order);

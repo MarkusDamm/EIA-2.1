@@ -55,8 +55,9 @@ export namespace L07_CocktailBar {
             // }
 
             if (url.query["command"] == "retrieve") {
-                console.log("Trying to show orders");
-                _response.write(retrieveOrders());
+                let report: Promise<string> = retrieveOrders();
+                if (report)
+                    _response.write(report);
             } else {
                 console.log("urlQuery: ", url.query);
                 let jsonString: string = JSON.stringify(url.query);
@@ -68,11 +69,11 @@ export namespace L07_CocktailBar {
         _response.end();
     }
 
-    async function retrieveOrders(): Promise<any[]> {
+    async function retrieveOrders(): Promise<string> {
         console.log("Asking DB about Orders");
         let cursor: Mongo.Cursor = await orders.find();
-        console.log(await cursor.toArray());
-        return cursor.toArray(); 
+        console.log(await cursor.toString());
+        return cursor.toString(); 
     }
 
     function storeOrder(_order: Order): void {
