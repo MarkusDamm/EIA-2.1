@@ -13,3 +13,13 @@ form {
     right: 10px;
     width: 40%;
 }
+
+#charField {
+    display: block;
+    position: absolute;
+    top: 450px;
+    left: 58%;
+    right: 10px;
+    width: 40%;
+}
+

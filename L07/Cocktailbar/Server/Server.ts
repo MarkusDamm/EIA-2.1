@@ -9,8 +9,8 @@ export namespace L07_CocktailBar {
     let orders: Mongo.Collection;
     let databaseURL: string;
 
-    let dbName: string = "Cocktailbar";
-    let dbCollection: string = "Orders";
+    let dbName: string = "FirstFantasy";
+    let dbCollection: string = "Characters";
 
     if (process.argv[2] == "remote") {
         databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";

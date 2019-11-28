@@ -7,8 +7,8 @@ var L07_CocktailBar;
 (function (L07_CocktailBar) {
     let orders;
     let databaseURL;
-    let dbName = "Cocktailbar";
-    let dbCollection = "Orders";
+    let dbName = "FirstFantasy";
+    let dbCollection = "Characters";
     if (process.argv[2] == "remote") {
         databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";
     }

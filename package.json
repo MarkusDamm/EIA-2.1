@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node ./L06/Cocktailbar/Server/Server.js remote"
+    "start": "node ./L07/Cocktailbar/Server/Server.js remote"
   },
   "repository": {
     "type": "git",
