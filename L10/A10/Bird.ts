@@ -1,18 +1,23 @@
-namespace MyFuwa_09 {
+namespace MyFuwa_10 {
     export class Bird extends Moveable {
         colorBody: string;
         colorTail: string;
         xInverted: number;
-        
+        depth: boolean;
+
         constructor(_position: Vector) {
             super(_position);
             this.velocity = new Vector(2 + Math.random() * 4, -2 + Math.random() * 4);
             this.colorBody = this.getRandomColor();
             this.colorTail = this.getRandomColor();
-            if (this.position.y <= 420)
+            if (this.position.y <= 480)
                 this.drawFly();
             else
                 this.drawStand();
+            this.depth = false;
+            if (Math.random() <= 0.4) {
+                this.depth = true;
+            }
         }
 
         drawFly(): void {

@@ -1,4 +1,4 @@
-namespace MyFuwa_09 {
+namespace MyFuwa_10 {
     export class Snowflake extends Moveable {
         gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 2, 0, 0, 5);
         

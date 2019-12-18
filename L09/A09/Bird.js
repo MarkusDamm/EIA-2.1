@@ -112,12 +112,9 @@ var MyFuwa_09;
             }
             return color;
         }
-        // move(): void {
-        //     this.position.add(this.velocity);
-        // }
         update() {
             this.move();
-            if (this.position.y <= 420)
+            if (this.position.y <= 480)
                 this.drawFly();
             else
                 this.drawStand();

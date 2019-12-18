@@ -1,4 +1,4 @@
-namespace MyFuwa_09 {
+namespace MyFuwa_10 {
     export class Cloud extends Moveable {
         size: Vector;
         nParticles: number = 40;
