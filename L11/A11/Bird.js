@@ -4,6 +4,17 @@ var MyFuwa_11;
     class Bird extends MyFuwa_11.Moveable {
         constructor(_position) {
             super(_position);
+            this.changeTarget = () => {
+                this.target = new MyFuwa_11.Vector(Math.random() * MyFuwa_11.canvas.width, 500 + Math.random() * (MyFuwa_11.canvas.height - 510));
+                this.velocity = this.target.subtract(this.position);
+                this.velocity.scale(0.01 + Math.random() * 0.01);
+                if (this.velocity.x < 0)
+                    this.xInverted = -1;
+                else
+                    this.xInverted = 1;
+                this.isInvoked = false;
+                console.log("Zielen");
+            };
             this.colorBody = this.getRandomColor();
             this.colorTail = this.getRandomColor();
             this.changeTarget();
@@ -107,7 +118,7 @@ var MyFuwa_11;
             MyFuwa_11.crc2.restore();
         }
         update() {
-            if (this.position == this.target || (this.position.x <= this.target.x + 5 && this.position.y <= this.target.y + 5 && this.position.x >= this.target.x - 5 && this.position.y >= this.target.y - 5)) {
+            if (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10)) {
                 this.velocity.x = this.velocity.y = 0;
                 this.draw();
                 // console.log("at destination");
@@ -127,17 +138,6 @@ var MyFuwa_11;
                 color += letters[Math.floor(Math.random() * 16)];
             }
             return color;
-        }
-        changeTarget() {
-            this.target = new MyFuwa_11.Vector(Math.random() * MyFuwa_11.canvas.width, 500 + Math.random() * (MyFuwa_11.canvas.height - 510));
-            this.velocity = this.target.subtract(this.position);
-            this.velocity.scale(0.01 + Math.random() * 0.01);
-            if (this.velocity.x < 0)
-                this.xInverted = -1;
-            else
-                this.xInverted = 1;
-            this.isInvoked = false;
-            console.log("Zielen");
         }
     }
     MyFuwa_11.Bird = Bird;

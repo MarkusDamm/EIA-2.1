@@ -128,7 +128,7 @@ namespace MyFuwa_11 {
         }
 
         update(): void {
-            if (this.position == this.target || (this.position.x <= this.target.x + 5 && this.position.y <= this.target.y + 5 && this.position.x >= this.target.x - 5 && this.position.y >= this.target.y - 5)) {
+            if (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10)) {
                 this.velocity.x = this.velocity.y = 0;
                 this.draw();
                 // console.log("at destination");
@@ -151,7 +151,7 @@ namespace MyFuwa_11 {
             return color;
         }
 
-        changeTarget(): void {
+        changeTarget = () => {
             this.target = new Vector(Math.random() * canvas.width, 500 + Math.random() * (canvas.height - 510));
             this.velocity = this.target.subtract(this.position);
             this.velocity.scale(0.01 + Math.random() * 0.01);
