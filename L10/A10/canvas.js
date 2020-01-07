@@ -57,7 +57,7 @@ var MyFuwa_10;
         MyFuwa_10.crc2.fill();
     }
     function drawSun(_position) {
-        // auch danke
+        // auch danke Jirka
         let r1 = 30;
         let r2 = 150;
         let gradient = MyFuwa_10.crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
@@ -127,11 +127,6 @@ var MyFuwa_10;
         MyFuwa_10.crc2.restore();
     }
     function drawBirdhouse(_position, _direction) {
-        // let direction: number = -1.3 + Math.random() * 2;
-        // direction = Number(direction.toFixed(0));
-        // if (direction == 0)
-        //     direction = 1;
-        // console.log(direction);
         MyFuwa_10.crc2.save();
         MyFuwa_10.crc2.translate(_position.x, _position.y);
         MyFuwa_10.crc2.beginPath();

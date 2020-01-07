@@ -1,4 +1,4 @@
-namespace MyFuwa_10 {
+namespace MyFuwa_11 {
     console.log("Waiting on load");
     window.addEventListener("load", handleLoad);
     export let canvas: HTMLCanvasElement;
@@ -211,7 +211,7 @@ namespace MyFuwa_10 {
         let x: number;
         let y: number;
 
-        for (let i: number = 0; i < 8; i++) {
+        for (let i: number = 0; i < 5; i++) {
             y = 420 + Math.random() * 100;
             x = 300 + Math.random() * 700;
             drawIgloo(new Vector(x, y));

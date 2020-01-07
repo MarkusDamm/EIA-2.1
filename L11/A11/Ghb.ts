@@ -1,4 +1,4 @@
-namespace MyFuwa_10 {
+namespace MyFuwa_11 {
     export class Ghb extends Object {
 
         constructor(_position: Vector) {
