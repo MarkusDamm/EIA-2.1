@@ -10,7 +10,7 @@ namespace MyFuwa_11 {
             this.draw();
         }
 
-        draw(): void {
+        private draw(): void {
             crc2.save();
 
             crc2.beginPath();

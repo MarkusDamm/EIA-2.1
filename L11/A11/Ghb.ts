@@ -6,7 +6,7 @@ namespace MyFuwa_11 {
             this.draw();
         }
 
-        draw(): void {
+        private draw(): void {
             // console.log("Mal GHB");
             crc2.save();
             crc2.translate(this.position.x, this.position.y);

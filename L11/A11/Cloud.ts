@@ -14,7 +14,7 @@ namespace MyFuwa_11 {
             this.draw();
         }
 
-        draw(): void {
+        private draw(): void {
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, this.rParticle);
 
             this.particle.arc(0, 0, this.rParticle, 0, 2 * Math.PI);
