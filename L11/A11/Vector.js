@@ -5,33 +5,31 @@ var MyFuwa_11;
         constructor(_x, _y) {
             this.set(_x, _y);
         }
-        set(_x, _y) {
-            this.x = _x;
-            this.y = _y;
+        static getDifference(_minuend, _subtrahend) {
+            let result = new Vector(_minuend.x - _subtrahend.x, _minuend.y - _subtrahend.y);
+            return result;
+        }
+        static getRandom(_minLength, _maxLength) {
+            let length = _minLength + Math.random() * (_maxLength - _minLength);
+            let direction = Math.random() * 2 * Math.PI;
+            let result = new Vector(Math.cos(direction), Math.sin(direction));
+            result.scale(length);
+            return result;
+        }
+        static getSum(_addend1, _addend2) {
+            let result = new Vector(_addend1.x + _addend2.x, _addend1.x + _addend2.y);
+            return result;
+        }
+        add(_addend) {
+            this.set(this.x + _addend.x, this.y + _addend.y);
         }
         scale(_factor) {
             this.x *= _factor;
             this.y *= _factor;
         }
-        add(_addend) {
-            this.x += _addend.x;
-            this.y += _addend.y;
-        }
-        subtract(_subtrahend) {
-            let result = new Vector(0, 0);
-            result.x = this.x - _subtrahend.x;
-            result.y = this.y - _subtrahend.y;
-            return result;
-        }
-        random(_minLength, _maxLength) {
-            let length = _minLength + Math.random() * (_maxLength - _minLength);
-            let direction = Math.random() * 2 * Math.PI;
-            this.set(Math.cos(direction), Math.sin(direction));
-            this.scale(length);
-        }
-        copy() {
-            let vector = new Vector(this.x, this.y);
-            return vector;
+        set(_x, _y) {
+            this.x = _x;
+            this.y = _y;
         }
     }
     MyFuwa_11.Vector = Vector;

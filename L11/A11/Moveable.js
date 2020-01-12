@@ -2,6 +2,10 @@
 var MyFuwa_11;
 (function (MyFuwa_11) {
     class Moveable extends MyFuwa_11.Object {
+        update() {
+            this.move();
+            this.draw();
+        }
         move() {
             this.position.add(this.velocity);
             if (this.position.x >= MyFuwa_11.canvas.width + 60) {
@@ -16,10 +20,6 @@ var MyFuwa_11;
             if (this.position.y <= -60) {
                 this.position.y = MyFuwa_11.canvas.height + 50;
             }
-        }
-        update() {
-            this.move();
-            this.draw();
         }
     }
     MyFuwa_11.Moveable = Moveable;

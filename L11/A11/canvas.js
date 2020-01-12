@@ -29,8 +29,8 @@ var MyFuwa_11;
             object = new MyFuwa_11.Ghb(new MyFuwa_11.Vector(100, 460));
             drawIgloos();
             drawSnowman(new MyFuwa_11.Vector(800, 600));
-            birdX = 300 + Math.random() * 300;
-            birdY = 500 + Math.random() * 150;
+            birdX = 250 + Math.random() * 350;
+            birdY = 400 + Math.random() * 150;
             direction = -1.3 + Math.random() * 2;
             direction = Number(direction.toFixed(0));
             if (direction == 0)
@@ -44,7 +44,8 @@ var MyFuwa_11;
             let amount = 100;
             drawSnowflakes(amount);
         }
-        console.log(moveablesArray);
+        // console.log(moveablesArray);
+        MyFuwa_11.canvas.addEventListener("click", handleClick);
         // window.setInterval(update, 1000);
         window.setTimeout(update, 1000);
     }
@@ -167,6 +168,7 @@ var MyFuwa_11;
         MyFuwa_11.crc2.moveTo(0, -25);
         MyFuwa_11.crc2.lineTo(direction * -25, -23);
         MyFuwa_11.crc2.stroke();
+        MyFuwa_11.birdHousePolePosition = new MyFuwa_11.Vector(direction * -8 + _position.x, -25 + _position.y);
         MyFuwa_11.crc2.restore();
     }
     function drawIgloos() {
@@ -252,6 +254,13 @@ var MyFuwa_11;
             moveablesArray.push(moveable);
         }
     }
+    function handleClick(_event) {
+        let mousePosition = new MyFuwa_11.Vector(_event.x, _event.y);
+        for (let moveable of moveablesArray) {
+            if (moveable.isTrained)
+                moveable.changeTarget(mousePosition);
+        }
+    }
     function update() {
         window.setTimeout(update, 1000 / fps);
         MyFuwa_11.crc2.clearRect(0, 0, MyFuwa_11.canvas.width, MyFuwa_11.canvas.height);
@@ -261,7 +270,7 @@ var MyFuwa_11;
             if (moveable.depth)
                 moveable.update();
         }
-        drawBirdhouse(new MyFuwa_11.Vector(birdX, birdY), direction);
+        // drawBirdhouse(new Vector(birdX, birdY), direction);
         drawSnowman(new MyFuwa_11.Vector(800, 600));
         for (let moveable of moveablesArray) {
             if (!moveable.depth)

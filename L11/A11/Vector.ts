@@ -7,39 +7,36 @@ namespace MyFuwa_11 {
             this.set(_x, _y);
         }
         
-        set(_x: number, _y: number): void {
-            this.x = _x;
-            this.y = _y;
-        }
-
-        scale(_factor: number): void {
-            this.x *= _factor;
-            this.y *= _factor;
-        }
-
-        add(_addend: Vector): void {
-            this.x += _addend.x;
-            this.y += _addend.y;
-        }
-
-        subtract(_subtrahend: Vector): Vector {
-            let result: Vector = new Vector(0, 0);
-            result.x = this.x - _subtrahend.x;
-            result.y = this.y - _subtrahend.y;
+        public static getDifference(_minuend: Vector, _subtrahend: Vector): Vector {
+            let result: Vector = new Vector(_minuend.x - _subtrahend.x, _minuend.y - _subtrahend.y);
             return result;
         }
 
-        random(_minLength: number, _maxLength: number): void {
+        public static getRandom(_minLength: number, _maxLength: number): Vector {
             let length: number = _minLength + Math.random() * (_maxLength - _minLength);
             let direction: number = Math.random() * 2 * Math.PI;
-
-            this.set(Math.cos(direction), Math.sin(direction));
-            this.scale(length);
+            let result: Vector = new Vector(Math.cos(direction), Math.sin(direction));
+            result.scale(length);
+            return result;
         }
 
-        copy(): Vector {
-            let vector: Vector = new Vector(this.x, this.y);
-            return vector;
+        public static getSum(_addend1: Vector, _addend2: Vector): Vector {
+            let result: Vector = new Vector(_addend1.x + _addend2.x, _addend1.x + _addend2.y);
+            return result;
+        }
+
+        public add(_addend: Vector): void {
+            this.set(this.x + _addend.x, this.y + _addend.y);
+        }
+        
+        public scale(_factor: number): void {
+            this.x *= _factor;
+            this.y *= _factor;
+        }
+        
+        private set(_x: number, _y: number): void {
+            this.x = _x;
+            this.y = _y;
         }
     }
 }

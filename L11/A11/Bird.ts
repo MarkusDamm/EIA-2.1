@@ -6,24 +6,88 @@ namespace MyFuwa_11 {
         depth: boolean;
 
         target: Vector;
+        isTargeting: boolean;
         isTrained: boolean;
+        isThinking: boolean;
+        isPecking: boolean;
         isInvoked: boolean;
 
         constructor(_position: Vector) {
             super(_position);
-            this.colorBody = this.getRandomColor();
-            this.colorTail = this.getRandomColor();
+            this.colorBody = Bird.getRandomColor();
+            this.colorTail = Bird.getRandomColor();
 
-            this.changeTarget();
-
-            this.draw();
-            this.depth = false;
+            this.depth = this.isTrained = this.isPecking = this.isThinking = false;
             if (Math.random() <= 0.3) {
                 this.depth = true;
             }
+            if (Math.random() <= 0.5) {
+                this.velocity = new Vector(-4 + Math.random() * 8, -2 + Math.random() * 4);
+                // this.velocity = Vector.getRandom(2, 5);
+                if (this.velocity.x <= 0) {
+                    this.xInverted = -1;
+                    this.velocity.x -= 3;
+                }
+                else {
+                    this.xInverted = 1;
+                    this.velocity.x += 3;
+                }
+            }
+            else {
+                this.changeTarget();
+                if (Math.random() <= 0.2) {
+                    this.isTrained = true;
+                }
+            }
+            this.draw();
         }
 
-        draw(): void {
+        private static getRandomColor(): string {
+            let letters: string = "0123456789ABCDEF";
+            let color: string = "#";
+            for (let i: number = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        public changeTarget: Function = (_target?: Vector): void => {
+            if (_target) 
+                this.target = _target;
+            else if (Math.random() <= 0.05)
+                this.target = birdHousePolePosition;
+            else
+                this.target = new Vector(Math.random() * canvas.width, 500 + Math.random() * (canvas.height - 510));
+            this.velocity = Vector.getDifference(this.target, this.position);
+            this.velocity.scale(0.01 + Math.random() * 0.01);
+            if (this.velocity.x < 0)
+                this.xInverted = -1;
+            else this.xInverted = 1;
+
+            this.isInvoked = false;
+            console.log("Zielen");
+        }
+
+        public update(): void {
+            if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10))) {
+                this.velocity.x = this.velocity.y = 0;
+                this.draw();
+                // console.log("at destination");
+                if (this.isInvoked == false) {
+                    setTimeout(this.changeTarget, 5000);
+                    this.isInvoked = true;
+                }
+                if (this.isThinking == false) {
+                    setTimeout(this.changePecking, 500);
+                    this.isThinking = true;
+                }
+            }
+            else {
+                super.update();
+            }
+        }
+
+        private draw(): void {
             // console.log("Draw Bird");
 
             crc2.save();
@@ -31,7 +95,7 @@ namespace MyFuwa_11 {
             crc2.scale(0.8, 0.8);
             crc2.beginPath();
 
-            if (this.velocity.x != 0) {
+            if (this.velocity.x != 0 && this.target || this.position.y <= 550 && !this.target) {
                 //Beak
                 crc2.fillStyle = "black";
                 crc2.beginPath();
@@ -91,7 +155,11 @@ namespace MyFuwa_11 {
                 crc2.lineTo(this.xInverted * 10, 0);
                 crc2.stroke();
                 crc2.closePath();
-
+                
+                if (this.isPecking) {
+                    crc2.rotate(Math.PI * 0.3 * this.xInverted);
+                    crc2.translate(12 * -this.xInverted, 14);
+                }
                 //Beak
                 crc2.fillStyle = "black";
                 crc2.beginPath();
@@ -127,40 +195,15 @@ namespace MyFuwa_11 {
             crc2.restore();
         }
 
-        update(): void {
-            if (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10)) {
-                this.velocity.x = this.velocity.y = 0;
-                this.draw();
-                // console.log("at destination");
-                if (this.isInvoked == false) {
-                    setTimeout(this.changeTarget, 5000);
-                    this.isInvoked = true;
-                }
+        private changePecking: Function = (): void => {
+            if (!this.isPecking) {
+                this.isPecking = true;
+                setTimeout(this.changePecking, 500);
             }
             else {
-                super.update();
+                this.isPecking = false;
+                this.isThinking = false;
             }
-        }
-
-        getRandomColor(): string {
-            let letters: string = "0123456789ABCDEF";
-            let color: string = "#";
-            for (let i: number = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        changeTarget = () => {
-            this.target = new Vector(Math.random() * canvas.width, 500 + Math.random() * (canvas.height - 510));
-            this.velocity = this.target.subtract(this.position);
-            this.velocity.scale(0.01 + Math.random() * 0.01);
-            if (this.velocity.x < 0)
-                this.xInverted = -1;
-            else this.xInverted = 1;
-
-            this.isInvoked = false;
-            console.log("Zielen");
         }
     }
 }

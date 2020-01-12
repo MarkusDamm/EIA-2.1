@@ -3,6 +3,8 @@ namespace MyFuwa_11 {
     window.addEventListener("load", handleLoad);
     export let canvas: HTMLCanvasElement;
     export let crc2: CanvasRenderingContext2D;
+    export let birdHousePolePosition: Vector;
+
     let moveable: Moveable;
     let moveablesArray: Moveable[] = [];
     let image: ImageData;
@@ -31,8 +33,8 @@ namespace MyFuwa_11 {
             object = new Ghb(new Vector(100, 460));
             drawIgloos();
             drawSnowman(new Vector(800, 600));
-            birdX = 300 + Math.random() * 300;
-            birdY = 500 + Math.random() * 150;
+            birdX = 250 + Math.random() * 350;
+            birdY = 400 + Math.random() * 150;
 
             direction = -1.3 + Math.random() * 2;
             direction = Number(direction.toFixed(0));
@@ -51,7 +53,9 @@ namespace MyFuwa_11 {
             drawSnowflakes(amount);
 
         }
-        console.log(moveablesArray);
+        // console.log(moveablesArray);
+
+        canvas.addEventListener("click", handleClick);
         // window.setInterval(update, 1000);
         window.setTimeout(update, 1000);
     }
@@ -204,6 +208,7 @@ namespace MyFuwa_11 {
         crc2.lineTo(direction * -25, -23);
         crc2.stroke();
 
+        birdHousePolePosition = new Vector( direction * -8 + _position.x, -25 + _position.y);
         crc2.restore();
     }
 
@@ -302,6 +307,14 @@ namespace MyFuwa_11 {
         }
     }
 
+    function handleClick(_event: MouseEvent): void {
+        let mousePosition: Vector = new Vector(_event.x, _event.y);
+        for (let moveable of moveablesArray) {
+            if (moveable.isTrained)
+                moveable.changeTarget(mousePosition);
+        }
+    }
+
     function update(): void {
         window.setTimeout(update, 1000 / fps);
 
@@ -312,7 +325,7 @@ namespace MyFuwa_11 {
             if (moveable.depth)
                 moveable.update();
         }
-        drawBirdhouse(new Vector(birdX, birdY), direction);
+        // drawBirdhouse(new Vector(birdX, birdY), direction);
         drawSnowman(new Vector(800, 600));
 
         for (let moveable of moveablesArray) {

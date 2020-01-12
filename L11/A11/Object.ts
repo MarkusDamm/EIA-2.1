@@ -1,14 +1,12 @@
 namespace MyFuwa_11 {
-    export class Object {
-        position: Vector;
+    export abstract class Object {
+        protected position: Vector;
 
         constructor(_position: Vector) {
             this.position = _position;
             // this.draw();
         }
 
-        draw(): void {
-            //    
-        }
+        abstract draw(): void;
     }
 }

@@ -6,9 +6,6 @@ var MyFuwa_11;
             this.position = _position;
             // this.draw();
         }
-        draw() {
-            //    
-        }
     }
     MyFuwa_11.Object = Object;
 })(MyFuwa_11 || (MyFuwa_11 = {}));
