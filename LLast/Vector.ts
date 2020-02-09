@@ -29,6 +29,10 @@ namespace MyFuwa_last {
             return this;
         }
 
+        public get length(): number {
+            return Math.hypot(this.x, this.y);
+        }
+
         public add(_addend: Vector): void {
             this.set(this.x + _addend.x, this.y + _addend.y);
         }

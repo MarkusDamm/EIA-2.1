@@ -1,5 +1,5 @@
 namespace MyFuwa_last {
-    export class Cloud extends Moveable {
+    export class Cloud extends Object {
         size: Vector;
         nParticles: number = 40;
         rParticle: number = 50;
@@ -7,7 +7,7 @@ namespace MyFuwa_last {
 
         constructor(_position: Vector, _size: Vector) {
             super(_position);
-            this.velocity = new Vector(2, 0);
+            // this.velocity = new Vector(2, 0);
             this.particle = new Path2D();
             // this.position = _position;
             this.size = _size;

@@ -4,7 +4,10 @@ var MyFuwa_last;
     class Bird extends MyFuwa_last.Moveable {
         constructor(_position) {
             super(_position);
+            this.isInvoked = true;
             this.changeTarget = (_target) => {
+                if (!this.isInvoked)
+                    return;
                 if (_target)
                     this.target = _target;
                 else if (Math.random() <= 0.05)
@@ -81,6 +84,9 @@ var MyFuwa_last;
             else {
                 super.update();
             }
+        }
+        get getPosition() {
+            return this.position;
         }
         draw() {
             // console.log("Draw Bird");

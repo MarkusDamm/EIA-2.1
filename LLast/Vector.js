@@ -23,6 +23,9 @@ var MyFuwa_last;
         getValue() {
             return this;
         }
+        get length() {
+            return Math.hypot(this.x, this.y);
+        }
         add(_addend) {
             this.set(this.x + _addend.x, this.y + _addend.y);
         }

@@ -10,7 +10,7 @@ namespace MyFuwa_last {
         isTrained: boolean;
         isThinking: boolean;
         isPecking: boolean;
-        isInvoked: boolean;
+        isInvoked: boolean = true;
 
         constructor(_position: Vector) {
             super(_position);
@@ -52,6 +52,7 @@ namespace MyFuwa_last {
         }
 
         public changeTarget: Function = (_target?: Vector): void => {
+            if (!this.isInvoked) return;
             if (_target) 
                 this.target = _target;
             else if (Math.random() <= 0.05)
@@ -87,6 +88,10 @@ namespace MyFuwa_last {
             }
         }
 
+        public get getPosition(): Vector {
+            return this.position;
+        }
+        
         private draw(): void {
             // console.log("Draw Bird");
             crc2.save();

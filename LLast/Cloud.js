@@ -1,12 +1,12 @@
 "use strict";
 var MyFuwa_last;
 (function (MyFuwa_last) {
-    class Cloud extends MyFuwa_last.Moveable {
+    class Cloud extends MyFuwa_last.Object {
         constructor(_position, _size) {
             super(_position);
             this.nParticles = 40;
             this.rParticle = 50;
-            this.velocity = new MyFuwa_last.Vector(2, 0);
+            // this.velocity = new Vector(2, 0);
             this.particle = new Path2D();
             // this.position = _position;
             this.size = _size;

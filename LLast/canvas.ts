@@ -5,13 +5,15 @@ namespace MyFuwa_last {
     export let crc2: CanvasRenderingContext2D;
     export let birdHousePolePosition: Vector;
 
-    let url: string = "https://fuwa-eia2-1.herokuapp.com/";
+    // let url: string = "https://fuwa-eia2-1.herokuapp.com/";
 
     let moveable: Moveable;
-    let moveablesArray: Moveable[] = [];
+    let moveables: Moveable[] = [];
     export let birds: Bird[] = [];
+    export let foods: Food[] = [];
+    export let snowballs: Snowball[] = [];
     let image: ImageData;
-    let fps: number = 30;
+    export let fps: number = 30;
 
     let birdX: number;
     let birdY: number;
@@ -43,20 +45,20 @@ namespace MyFuwa_last {
             direction = Number(direction.toFixed(0));
             if (direction == 0)
                 direction = 1;
-            
+
             drawBirdhouse(new Vector(birdX, birdY), direction);
-            moveable = new Cloud(new Vector(600, 125), new Vector(350, 100));
+            object = new Cloud(new Vector(600, 125), new Vector(350, 100));
             image = crc2.getImageData(0, 0, canvas.width, canvas.height);
 
             // Moveables
-            // moveablesArray.push(moveable);
+            // moveables.push(moveable);
             drawBirds(new Vector(20, 20), new Vector(canvas.width - 100, canvas.height - 20), 22);
 
             let amount: number = 100;
             drawSnowflakes(amount);
 
         }
-        // console.log(moveablesArray);
+        // console.log(moveables);
 
         canvas.addEventListener("click", handleClick);
         // window.setInterval(update, 1000);
@@ -211,7 +213,7 @@ namespace MyFuwa_last {
         crc2.lineTo(direction * -25, -23);
         crc2.stroke();
 
-        birdHousePolePosition = new Vector( direction * -8 + _position.x, -25 + _position.y);
+        birdHousePolePosition = new Vector(direction * -8 + _position.x, -25 + _position.y);
         crc2.restore();
     }
 
@@ -295,7 +297,7 @@ namespace MyFuwa_last {
             let x: number = _start.x + Math.random() * _size.x;
             let y: number = _start.y + Math.random() * _size.y;
             moveable = new Bird(new Vector(x, y));
-            moveablesArray.push(moveable);
+            // moveables.push(moveable);
             birds.push(<Bird><unknown>moveable);    // unkown vom linter empfohlen
         }
 
@@ -307,15 +309,24 @@ namespace MyFuwa_last {
             position.x = Math.random() * canvas.width;
             position.y = Math.random() * canvas.height;
             moveable = new Snowflake(position);
-            moveablesArray.push(moveable);
+            moveables.push(moveable);
         }
     }
 
     function handleClick(_event: MouseEvent): void {
         let mousePosition: Vector = new Vector(_event.x, _event.y);
-        for (let moveable of birds) {
-            if (moveable.isTrained)
-                moveable.changeTarget(mousePosition);
+        // create food at location
+        if (_event.shiftKey) {
+            let food: Food = new Food(mousePosition);
+            foods.push(food);
+        }
+        else {
+            let snowball: Snowball = new Snowball(mousePosition);
+            snowballs.push(snowball);
+            // for (let moveable of birds) {
+            //     if (moveable.isTrained)
+            //         moveable.changeTarget(mousePosition);
+            // }
         }
     }
 
@@ -324,17 +335,29 @@ namespace MyFuwa_last {
 
         crc2.clearRect(0, 0, canvas.width, canvas.height);
         crc2.putImageData(image, 0, 0);
-        for (let moveable of moveablesArray) {
+        for (let moveable of moveables) {
+            moveable.update();
+        }
+        for (let food of foods) {
+            food.update();
+        }
+        for (let bird of birds) {
             // Bird in front or behind birdhouse & snowman
-            if (moveable.depth)
-                moveable.update();
+            if (bird.depth) {
+                bird.update();
+            }
         }
         // drawBirdhouse(new Vector(birdX, birdY), direction);
         drawSnowman(new Vector(800, 600));
 
-        for (let moveable of moveablesArray) {
-            if (!moveable.depth)
-                moveable.update();
+        for (let bird of birds) {
+            if (!bird.depth)
+                bird.update();
         }
+
+        for (let snowball of snowballs) {
+            snowball.update();
+        }
+
     }
 }
