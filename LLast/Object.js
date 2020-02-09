@@ -1,12 +1,12 @@
 "use strict";
-var MyFuwa_11;
-(function (MyFuwa_11) {
+var MyFuwa_last;
+(function (MyFuwa_last) {
     class Object {
         constructor(_position) {
             this.position = _position;
             // this.draw();
         }
     }
-    MyFuwa_11.Object = Object;
-})(MyFuwa_11 || (MyFuwa_11 = {}));
+    MyFuwa_last.Object = Object;
+})(MyFuwa_last || (MyFuwa_last = {}));
 //# sourceMappingURL=Object.js.map

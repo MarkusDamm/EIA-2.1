@@ -52,7 +52,7 @@ namespace MyFuwa_11 {
         }
 
         public changeTarget: Function = (_target?: Vector): void => {
-            if (_target) 
+            if (_target)
                 this.target = _target;
             else if (Math.random() <= 0.05)
                 this.target = birdHousePolePosition;
@@ -62,7 +62,7 @@ namespace MyFuwa_11 {
             this.velocity.scale(0.01 + Math.random() * 0.01);
             if (this.velocity.x < 0)
                 this.xInverted = -1;
-            else this.xInverted = 1;   
+            else this.xInverted = 1;
 
             this.isInvoked = false;
             console.log("Zielen");
@@ -126,9 +126,9 @@ namespace MyFuwa_11 {
 
                 //Body
                 crc2.beginPath();
-                if (this.xInverted == 1) 
+                if (this.xInverted == 1)
                     crc2.arc(this.xInverted * 43, 0, 12, Math.PI * 0.9, Math.PI * 1, true);
-                else     
+                else
                     crc2.arc(this.xInverted * 43, 0, 12, Math.PI * 1, Math.PI * 0.9);
                 crc2.moveTo(this.xInverted * 43, 0);
                 crc2.quadraticCurveTo(0, -25, this.xInverted * -25, 0);
@@ -155,7 +155,7 @@ namespace MyFuwa_11 {
                 crc2.lineTo(this.xInverted * 10, 0);
                 crc2.stroke();
                 crc2.closePath();
-                
+
                 if (this.isPecking) {
                     crc2.rotate(Math.PI * 0.3 * this.xInverted);
                     crc2.translate(12 * -this.xInverted, 14);
@@ -182,9 +182,9 @@ namespace MyFuwa_11 {
                 crc2.fillStyle = this.colorBody;
                 crc2.beginPath();
                 crc2.moveTo(this.xInverted * 30, -50);
-                if (this.xInverted == 1) 
+                if (this.xInverted == 1)
                     crc2.arc(30, -50, 12, Math.PI * 0.7, Math.PI * 1.1, true);
-                else    
+                else
                     crc2.arc(this.xInverted * 30, -50, 12, Math.PI * 0.1, Math.PI * 0);
                 crc2.quadraticCurveTo(this.xInverted * -10, -50, this.xInverted * -25, -20);
                 crc2.quadraticCurveTo(this.xInverted * 10, -10, this.xInverted * 30, -50);

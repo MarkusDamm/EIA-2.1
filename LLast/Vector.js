@@ -1,6 +1,6 @@
 "use strict";
-var MyFuwa_11;
-(function (MyFuwa_11) {
+var MyFuwa_last;
+(function (MyFuwa_last) {
     class Vector {
         constructor(_x, _y) {
             this.set(_x, _y);
@@ -20,6 +20,9 @@ var MyFuwa_11;
             let result = new Vector(_addend1.x + _addend2.x, _addend1.x + _addend2.y);
             return result;
         }
+        getValue() {
+            return this;
+        }
         add(_addend) {
             this.set(this.x + _addend.x, this.y + _addend.y);
         }
@@ -32,6 +35,6 @@ var MyFuwa_11;
             this.y = _y;
         }
     }
-    MyFuwa_11.Vector = Vector;
-})(MyFuwa_11 || (MyFuwa_11 = {}));
+    MyFuwa_last.Vector = Vector;
+})(MyFuwa_last || (MyFuwa_last = {}));
 //# sourceMappingURL=Vector.js.map
