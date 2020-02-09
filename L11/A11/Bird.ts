@@ -62,7 +62,7 @@ namespace MyFuwa_11 {
             this.velocity.scale(0.01 + Math.random() * 0.01);
             if (this.velocity.x < 0)
                 this.xInverted = -1;
-            else this.xInverted = 1;
+            else this.xInverted = 1;   
 
             this.isInvoked = false;
             console.log("Zielen");
