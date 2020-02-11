@@ -57,14 +57,15 @@ var MyFuwa_last;
                 console.log(jsonString);
             }
         }
-        let cursor = entries.find();
-        cursor.sort("score", -1); // not sorting
+        // let cursor: Mongo.Cursor = await entries.find();
+        // cursor.sort("score", -1);    // not sorting
         _response.end();
     }
     // Coded by Markus Damm
     async function retrieveEntries() {
         // console.log("Asking DB about entries ", entries.find());
         let cursor = await entries.find();
+        cursor = cursor.sort("score", -1);
         let answer = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {

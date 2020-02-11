@@ -69,14 +69,16 @@ export namespace MyFuwa_last {
                 console.log(jsonString);
             }
         }
-        let cursor: Mongo.Cursor = entries.find();
-        cursor.sort("score", -1);    // not sorting
+        // let cursor: Mongo.Cursor = await entries.find();
+        // cursor.sort("score", -1);    // not sorting
+
         _response.end();
     }
 // Coded by Markus Damm
     async function retrieveEntries(): Promise<any[] | string> {
         // console.log("Asking DB about entries ", entries.find());
         let cursor: Mongo.Cursor = await entries.find();
+        cursor = cursor.sort("score", -1);
         let answer: Promise<any[]> = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {
