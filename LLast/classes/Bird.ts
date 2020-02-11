@@ -1,23 +1,23 @@
 namespace MyFuwa_last {
     export class Bird extends Moveable {
-        colorBody: string;
-        colorTail: string;
-        xInverted: number;
-        depth: boolean;
+        public depth: boolean;
+        private colorBody: string;
+        private colorTail: string;
+        private xInverted: number;
 
-        target: Vector;
-        isTargeting: boolean;
-        isTrained: boolean;
-        isThinking: boolean;
-        isPecking: boolean;
-        isInvoked: boolean = true;
+        private target: Vector;
+        private isTargeting: boolean;
+        // isTrained: boolean;
+        private isThinking: boolean;
+        private isPecking: boolean;
+        private isInvoked: boolean = true;
 
         constructor(_position: Vector) {
             super(_position);
             this.colorBody = Bird.getRandomColor();
             this.colorTail = Bird.getRandomColor();
 
-            this.depth = this.isTrained = this.isPecking = this.isThinking = false;
+            this.depth = this.isPecking = this.isThinking = false;
             if (Math.random() <= 0.3) {
                 this.depth = true;
             }
@@ -35,9 +35,9 @@ namespace MyFuwa_last {
             }
             else {
                 this.changeTarget();
-                if (Math.random() <= 0.2) {
-                    this.isTrained = true;
-                }
+                // if (Math.random() <= 0.2) {
+                //     this.isTrained = true;
+                // }
             }
             this.draw();
         }
