@@ -36,6 +36,7 @@ namespace MyFuwa_last {
 
         loadHighscore();
 
+        startEle.style.display = "initial";
         gameEle.style.display = "none";
         endEle.style.display = "none";
 
@@ -169,14 +170,18 @@ namespace MyFuwa_last {
         let response: Response = await fetch(url + "?" + query);
         let responseText: string = await response.text();
         let parsedJson: any[] = JSON.parse(responseText);
-        let output: string = "";
+        let output: HTMLDivElement = document.createElement("div");
         
         for (let entry of parsedJson) {
-            output += entry.name + " " + entry.score;
+            let paragraph: HTMLParagraphElement = document.createElement("p");
+            paragraph.innerText = entry.name + ": " + entry.score + " Punkte";
+            output.appendChild(paragraph);
         }
 
         // alert(responseText);
-        scoreboard.innerText = output;
+        if (scoreboard.firstChild)
+            scoreboard.removeChild(scoreboard.firstChild);
+        scoreboard.appendChild(output);
     }
 
     function drawBackground(): void {

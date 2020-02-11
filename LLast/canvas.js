@@ -26,6 +26,7 @@ var MyFuwa_last;
         endEle = document.querySelector("div.end");
         scoreboard = document.querySelector("div.highscore");
         loadHighscore();
+        startEle.style.display = "initial";
         gameEle.style.display = "none";
         endEle.style.display = "none";
         console.log("Start now");
@@ -139,12 +140,16 @@ var MyFuwa_last;
         let response = await fetch(url + "?" + query);
         let responseText = await response.text();
         let parsedJson = JSON.parse(responseText);
-        let output = "";
+        let output = document.createElement("div");
         for (let entry of parsedJson) {
-            output += entry.name + " " + entry.score;
+            let paragraph = document.createElement("p");
+            paragraph.innerText = entry.name + ": " + entry.score + " Punkte";
+            output.appendChild(paragraph);
         }
         // alert(responseText);
-        scoreboard.innerText = output;
+        if (scoreboard.firstChild)
+            scoreboard.removeChild(scoreboard.firstChild);
+        scoreboard.appendChild(output);
     }
     function drawBackground() {
         let gradient = MyFuwa_last.crc2.createLinearGradient(0, 0, 0, MyFuwa_last.canvas.height);
