@@ -61,6 +61,7 @@ var MyFuwa_last;
         cursor.sort("score", -1); // not sorting
         _response.end();
     }
+    // Coded by Markus Damm
     async function retrieveEntries() {
         // console.log("Asking DB about entries ", entries.find());
         let cursor = await entries.find();

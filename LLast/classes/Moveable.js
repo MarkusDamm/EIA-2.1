@@ -2,6 +2,7 @@
 var MyFuwa_last;
 (function (MyFuwa_last) {
     class Moveable extends MyFuwa_last.Object {
+        // Coded by Markus Damm
         update() {
             this.move();
             this.draw();

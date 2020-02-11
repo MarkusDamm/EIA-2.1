@@ -34,6 +34,7 @@ namespace MyFuwa_last {
             for (let bird of birds) {
                 if (Math.random() <= 0.1) {
                     bird.changeTarget(this.position);
+                    // Coded by Markus Damm
                 }
             }
         }

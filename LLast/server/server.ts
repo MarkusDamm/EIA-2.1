@@ -73,7 +73,7 @@ export namespace MyFuwa_last {
         cursor.sort("score", -1);    // not sorting
         _response.end();
     }
-
+// Coded by Markus Damm
     async function retrieveEntries(): Promise<any[] | string> {
         // console.log("Asking DB about entries ", entries.find());
         let cursor: Mongo.Cursor = await entries.find();

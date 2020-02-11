@@ -2,6 +2,7 @@
 var MyFuwa_last;
 (function (MyFuwa_last) {
     class Snowflake extends MyFuwa_last.Moveable {
+        // Coded by Markus Damm
         constructor(_position) {
             super(_position);
             this.gradient = MyFuwa_last.crc2.createRadialGradient(0, 0, 2, 0, 0, 5);

@@ -4,7 +4,7 @@ namespace MyFuwa_last {
         nParticles: number = 40;
         rParticle: number = 50;
         particle: Path2D;
-
+        
         constructor(_position: Vector, _size: Vector) {
             super(_position);
             // this.velocity = new Vector(2, 0);

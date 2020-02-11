@@ -57,7 +57,7 @@ namespace MyFuwa_last {
                 }
             }
             // for (let j: number = deleter.length - 1; j < 0; j--) {
-            //     birds.splice(deleter[j], 1);    // Um zu verhindern, dass Vögel bei der oberen Schleife übersprungen werden
+            //     birds.splice(deleter[j], 1);    // Um zu verhindern, dass Vögel bei der oberen Schleife übersprungen werden      // Coded by Markus Damm
             // }
             snowballs.shift();
             scoreElement.innerText = score.toString();

@@ -117,7 +117,7 @@ var MyFuwa_last;
         startEle.style.display = "none";
         gameEle.style.display = "none";
         endEle.style.display = "initial";
-        let username = prompt("Your score: " + MyFuwa_last.score + ". Enter your name!");
+        let username = prompt("Your score: " + MyFuwa_last.score + ". Enter your name!"); // Coded by Markus Damm
         if (username === null || username == "")
             endGame();
         else

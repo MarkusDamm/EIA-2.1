@@ -117,7 +117,7 @@ var MyFuwa_last;
                 MyFuwa_last.crc2.moveTo(this.xInverted * 10, 0);
                 MyFuwa_last.crc2.quadraticCurveTo(this.xInverted * 30, -20, this.xInverted * 20, -45);
                 MyFuwa_last.crc2.quadraticCurveTo(this.xInverted * 0, -22, this.xInverted * 10, 0);
-                MyFuwa_last.crc2.closePath();
+                MyFuwa_last.crc2.closePath(); // Coded by Markus Damm
                 MyFuwa_last.crc2.stroke();
                 MyFuwa_last.crc2.fill();
                 //Body

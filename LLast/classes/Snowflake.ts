@@ -1,7 +1,7 @@
 namespace MyFuwa_last {
     export class Snowflake extends Moveable {
         gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 2, 0, 0, 5);
-        
+        // Coded by Markus Damm
         constructor(_position: Vector) {
             super(_position);
             this.velocity = new Vector(0, Math.random() * 3);

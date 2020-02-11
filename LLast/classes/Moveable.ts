@@ -1,7 +1,7 @@
 namespace MyFuwa_last {
     export abstract class Moveable extends Object {
         velocity: Vector;
-
+        // Coded by Markus Damm
         public update(): void {
             this.move();
             this.draw();

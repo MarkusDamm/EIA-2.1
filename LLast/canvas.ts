@@ -148,7 +148,7 @@ namespace MyFuwa_last {
         gameEle.style.display = "none";
         endEle.style.display = "initial";
 
-        let username: string | null = prompt("Your score: " + score + ". Enter your name!");
+        let username: string | null = prompt("Your score: " + score + ". Enter your name!");                            // Coded by Markus Damm
         if (username === null || username == "") endGame();
         else    sendPlayerScore(username);
     }

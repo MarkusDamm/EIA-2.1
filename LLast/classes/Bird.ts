@@ -121,9 +121,9 @@ namespace MyFuwa_last {
                 crc2.fillStyle = this.colorBody;
                 crc2.beginPath();
                 crc2.moveTo(this.xInverted * 10, 0);
-                crc2.quadraticCurveTo(this.xInverted * 30, -20, this.xInverted * 20, -45);
+                crc2.quadraticCurveTo(this.xInverted * 30, -20, this.xInverted * 20, -45);      
                 crc2.quadraticCurveTo(this.xInverted * 0, -22, this.xInverted * 10, 0);
-                crc2.closePath();
+                crc2.closePath();   // Coded by Markus Damm
                 crc2.stroke();
                 crc2.fill();
 

@@ -33,6 +33,7 @@ var MyFuwa_last;
             for (let bird of MyFuwa_last.birds) {
                 if (Math.random() <= 0.1) {
                     bird.changeTarget(this.position);
+                    // Coded by Markus Damm
                 }
             }
         }

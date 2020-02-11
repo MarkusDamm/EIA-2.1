@@ -1,6 +1,6 @@
 namespace MyFuwa_last {
     export class Ghb extends Object {
-
+        // Drawn by Markus Damm
         constructor(_position: Vector) {
             super(_position);
             this.draw();
