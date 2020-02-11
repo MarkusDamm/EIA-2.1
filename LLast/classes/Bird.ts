@@ -6,8 +6,6 @@ namespace MyFuwa_last {
         private xInverted: number;
 
         private target: Vector;
-        private isTargeting: boolean;
-        // isTrained: boolean;
         private isThinking: boolean;
         private isPecking: boolean;
         private isInvoked: boolean = true;

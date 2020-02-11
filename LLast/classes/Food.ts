@@ -1,6 +1,6 @@
 namespace MyFuwa_last {
     export class Food extends Object {
-        lifetime: number;
+        private lifetime: number;
 
         constructor(_position: Vector) {
             super(_position);

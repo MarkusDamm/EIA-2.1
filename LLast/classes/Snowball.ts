@@ -1,8 +1,8 @@
 namespace MyFuwa_last {
 
     export class Snowball extends Moveable {
-        current: Vector;
-        size: number;
+        private current: Vector;
+        private size: number;
 
         constructor(_position: Vector) {
             if (score > 0)  score--;
