@@ -57,8 +57,8 @@ var MyFuwa_last;
                 console.log(jsonString);
             }
         }
-        let cursor = await entries.find();
-        cursor.sort("score");
+        let cursor = entries.find();
+        cursor.sort("score", 1);
         _response.end();
     }
     async function retrieveEntries() {

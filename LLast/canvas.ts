@@ -22,6 +22,8 @@ namespace MyFuwa_last {
     let endEle: HTMLDivElement;
     let scoreboard: HTMLDivElement;
 
+    let intervalID: number;
+
     let birdX: number;
     let birdY: number;
     let direction: number;
@@ -42,7 +44,7 @@ namespace MyFuwa_last {
         scoreElement.innerText = score.toString();
 
         document.querySelector("button").addEventListener("click", handleStart);
-        document.querySelector("div.end > button").addEventListener("click", handleStart);
+        document.querySelector("div.end > button").addEventListener("click", handleLoad);
     }
 
     function handleStart(): void {
@@ -90,7 +92,7 @@ namespace MyFuwa_last {
         // console.log(moveables);
 
         canvas.addEventListener("click", handleClick);
-        window.setInterval(update, 1000 / fps);
+        intervalID = window.setInterval(update, 1000 / fps);
     }
 
     function handleClick(_event: MouseEvent): void {
@@ -137,6 +139,8 @@ namespace MyFuwa_last {
 
     export function endGame(): void {
         scoreboard = <HTMLDivElement>document.querySelector("div.end > div.highscore");
+
+        clearInterval(intervalID);
 
         startEle.style.display = "none";
         gameEle.style.display = "none";

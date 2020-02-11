@@ -16,6 +16,7 @@ var MyFuwa_last;
     let gameEle;
     let endEle;
     let scoreboard;
+    let intervalID;
     let birdX;
     let birdY;
     let direction;
@@ -31,7 +32,7 @@ var MyFuwa_last;
         MyFuwa_last.scoreElement = document.querySelector("span#score");
         MyFuwa_last.scoreElement.innerText = MyFuwa_last.score.toString();
         document.querySelector("button").addEventListener("click", handleStart);
-        document.querySelector("div.end > button").addEventListener("click", handleStart);
+        document.querySelector("div.end > button").addEventListener("click", handleLoad);
     }
     function handleStart() {
         startEle.style.display = "none";
@@ -71,7 +72,7 @@ var MyFuwa_last;
         }
         // console.log(moveables);
         MyFuwa_last.canvas.addEventListener("click", handleClick);
-        window.setInterval(update, 1000 / MyFuwa_last.fps);
+        intervalID = window.setInterval(update, 1000 / MyFuwa_last.fps);
     }
     function handleClick(_event) {
         let mousePosition = new MyFuwa_last.Vector(_event.offsetX, _event.offsetY);
@@ -111,6 +112,7 @@ var MyFuwa_last;
     }
     function endGame() {
         scoreboard = document.querySelector("div.end > div.highscore");
+        clearInterval(intervalID);
         startEle.style.display = "none";
         gameEle.style.display = "none";
         endEle.style.display = "initial";

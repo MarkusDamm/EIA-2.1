@@ -69,8 +69,8 @@ export namespace MyFuwa_last {
                 console.log(jsonString);
             }
         }
-        let cursor: Mongo.Cursor = await entries.find();
-        cursor.sort("score");
+        let cursor: Mongo.Cursor = entries.find();
+        cursor.sort("score", 1);
         _response.end();
     }
 
