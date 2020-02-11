@@ -5,6 +5,7 @@ namespace MyFuwa_last {
         size: number;
 
         constructor(_position: Vector) {
+            score--;
             super(_position);
             this.size = 40;
             this.current = new Vector(canvas.width, canvas.height);
@@ -12,11 +13,19 @@ namespace MyFuwa_last {
             this.velocity.scale(1 / fps);    // 30 = fps -> 1sec Flugzeit
         }
 
-        move(): void {
+        public update(): void {
+            this.size -= 0.5;
+            super.update();
+            if (this.size < 25) {
+                this.impact();
+            }
+        }
+
+        protected move(): void {
             this.current.add(this.velocity);
         }
 
-        draw(): void {
+        protected draw(): void {
             crc2.save();
             crc2.translate(this.current.x, this.current.y);
             crc2.beginPath();
@@ -28,7 +37,7 @@ namespace MyFuwa_last {
             crc2.restore();
         }
 
-        isHitting(_position: Vector): boolean {
+        private isHitting(_position: Vector): boolean {
             let distance: Vector = Vector.getDifference(_position, this.position);
             if (distance.length <= 40) {
                 return true;
@@ -36,18 +45,19 @@ namespace MyFuwa_last {
             else return false;
         }
 
-        update(): void {
-            this.size -= 0.5;
-            super.update();
-            if (this.size < 25) {
-                for (let i: number = 0; i < birds.length; i++) {
-                    if (this.isHitting(birds[i].getPosition)) {
-                        birds.splice(i, 1); // Nicht ganz sauber, da Vögel "übersprungen" werden könnten. Oder man behauptet, sie weichen aus
-                    }
+        private impact(): void {
+            let deleter: number[] = [];
+            for (let i: number = 0; i < birds.length; i++) {
+                if (this.isHitting(birds[i].getPosition)) {
+                    score += 5 + Math.floor(birds[i].velocity.length);
+                    deleter.push(i);
                 }
-                snowballs.shift();
-                console.log(birds);
             }
+            for (let j: number = deleter.length - 1; j < 0; j--) {
+                birds.splice(deleter[j], 1);    // Um zu verhindern, dass Vögel bei der oberen Schleife übersprungen werden
+            }
+            snowballs.shift();
+            // console.log(birds);
         }
     }
 }

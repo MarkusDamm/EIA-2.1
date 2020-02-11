@@ -11,6 +11,7 @@ var MyFuwa_last;
     MyFuwa_last.snowballs = [];
     let image;
     MyFuwa_last.fps = 30;
+    MyFuwa_last.score = 0;
     let birdX;
     let birdY;
     let direction;
@@ -50,8 +51,43 @@ var MyFuwa_last;
         }
         // console.log(moveables);
         MyFuwa_last.canvas.addEventListener("click", handleClick);
-        // window.setInterval(update, 1000);
         window.setTimeout(update, 1000);
+    }
+    function handleClick(_event) {
+        let mousePosition = new MyFuwa_last.Vector(_event.offsetX, _event.offsetY);
+        if (_event.shiftKey) {
+            let food = new MyFuwa_last.Food(mousePosition);
+            MyFuwa_last.foods.push(food);
+        }
+        else {
+            let snowball = new MyFuwa_last.Snowball(mousePosition);
+            MyFuwa_last.snowballs.push(snowball);
+        }
+    }
+    function update() {
+        window.setTimeout(update, 1000 / MyFuwa_last.fps);
+        MyFuwa_last.crc2.clearRect(0, 0, MyFuwa_last.canvas.width, MyFuwa_last.canvas.height);
+        MyFuwa_last.crc2.putImageData(image, 0, 0);
+        for (let moveable of moveables) {
+            moveable.update();
+        }
+        for (let food of MyFuwa_last.foods) {
+            food.update();
+        }
+        for (let bird of MyFuwa_last.birds) {
+            // Bird in front or behind snowman
+            if (bird.depth) {
+                bird.update();
+            }
+        }
+        drawSnowman(new MyFuwa_last.Vector(800, 600));
+        for (let bird of MyFuwa_last.birds) {
+            if (!bird.depth)
+                bird.update();
+        }
+        for (let snowball of MyFuwa_last.snowballs) {
+            snowball.update();
+        }
     }
     function drawBackground() {
         let gradient = MyFuwa_last.crc2.createLinearGradient(0, 0, 0, MyFuwa_last.canvas.height);
@@ -257,48 +293,6 @@ var MyFuwa_last;
             position.y = Math.random() * MyFuwa_last.canvas.height;
             moveable = new MyFuwa_last.Snowflake(position);
             moveables.push(moveable);
-        }
-    }
-    function handleClick(_event) {
-        let mousePosition = new MyFuwa_last.Vector(_event.x, _event.y);
-        // create food at location
-        if (_event.shiftKey) {
-            let food = new MyFuwa_last.Food(mousePosition);
-            MyFuwa_last.foods.push(food);
-        }
-        else {
-            let snowball = new MyFuwa_last.Snowball(mousePosition);
-            MyFuwa_last.snowballs.push(snowball);
-            // for (let moveable of birds) {
-            //     if (moveable.isTrained)
-            //         moveable.changeTarget(mousePosition);
-            // }
-        }
-    }
-    function update() {
-        window.setTimeout(update, 1000 / MyFuwa_last.fps);
-        MyFuwa_last.crc2.clearRect(0, 0, MyFuwa_last.canvas.width, MyFuwa_last.canvas.height);
-        MyFuwa_last.crc2.putImageData(image, 0, 0);
-        for (let moveable of moveables) {
-            moveable.update();
-        }
-        for (let food of MyFuwa_last.foods) {
-            food.update();
-        }
-        for (let bird of MyFuwa_last.birds) {
-            // Bird in front or behind birdhouse & snowman
-            if (bird.depth) {
-                bird.update();
-            }
-        }
-        // drawBirdhouse(new Vector(birdX, birdY), direction);
-        drawSnowman(new MyFuwa_last.Vector(800, 600));
-        for (let bird of MyFuwa_last.birds) {
-            if (!bird.depth)
-                bird.update();
-        }
-        for (let snowball of MyFuwa_last.snowballs) {
-            snowball.update();
         }
     }
 })(MyFuwa_last || (MyFuwa_last = {}));

@@ -3,11 +3,19 @@ var MyFuwa_last;
 (function (MyFuwa_last) {
     class Snowball extends MyFuwa_last.Moveable {
         constructor(_position) {
+            MyFuwa_last.score--;
             super(_position);
             this.size = 40;
             this.current = new MyFuwa_last.Vector(MyFuwa_last.canvas.width, MyFuwa_last.canvas.height);
             this.velocity = new MyFuwa_last.Vector(this.position.x - this.current.x, this.position.y - this.current.y);
             this.velocity.scale(1 / MyFuwa_last.fps); // 30 = fps -> 1sec Flugzeit
+        }
+        update() {
+            this.size -= 0.5;
+            super.update();
+            if (this.size < 25) {
+                this.impact();
+            }
         }
         move() {
             this.current.add(this.velocity);
@@ -31,18 +39,19 @@ var MyFuwa_last;
             else
                 return false;
         }
-        update() {
-            this.size -= 0.5;
-            super.update();
-            if (this.size < 25) {
-                for (let i = 0; i < MyFuwa_last.birds.length; i++) {
-                    if (this.isHitting(MyFuwa_last.birds[i].getPosition)) {
-                        MyFuwa_last.birds.splice(i, 1); // Nicht ganz sauber, da Vögel "übersprungen" werden könnten. Oder man behauptet, sie weichen aus
-                    }
+        impact() {
+            let deleter = [];
+            for (let i = 0; i < MyFuwa_last.birds.length; i++) {
+                if (this.isHitting(MyFuwa_last.birds[i].getPosition)) {
+                    MyFuwa_last.score += 5 + Math.floor(MyFuwa_last.birds[i].velocity.length);
+                    deleter.push(i);
                 }
-                MyFuwa_last.snowballs.shift();
-                console.log(MyFuwa_last.birds);
             }
+            for (let j = deleter.length - 1; j < 0; j--) {
+                MyFuwa_last.birds.splice(deleter[j], 1); // Um zu verhindern, dass Vögel bei der oberen Schleife übersprungen werden
+            }
+            MyFuwa_last.snowballs.shift();
+            // console.log(birds);
         }
     }
     MyFuwa_last.Snowball = Snowball;

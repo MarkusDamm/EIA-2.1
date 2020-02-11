@@ -14,6 +14,7 @@ namespace MyFuwa_last {
     export let snowballs: Snowball[] = [];
     let image: ImageData;
     export let fps: number = 30;
+    export let score: number = 0;
 
     let birdX: number;
     let birdY: number;
@@ -61,8 +62,49 @@ namespace MyFuwa_last {
         // console.log(moveables);
 
         canvas.addEventListener("click", handleClick);
-        // window.setInterval(update, 1000);
         window.setTimeout(update, 1000);
+    }
+
+    function handleClick(_event: MouseEvent): void {
+        let mousePosition: Vector = new Vector(_event.offsetX, _event.offsetY);
+        if (_event.shiftKey) {
+            let food: Food = new Food(mousePosition);
+            foods.push(food);
+        }
+        else {
+            let snowball: Snowball = new Snowball(mousePosition);
+            snowballs.push(snowball);
+        }
+    }
+
+    function update(): void {
+        window.setTimeout(update, 1000 / fps);
+
+        crc2.clearRect(0, 0, canvas.width, canvas.height);
+        crc2.putImageData(image, 0, 0);
+        for (let moveable of moveables) {
+            moveable.update();
+        }
+        for (let food of foods) {
+            food.update();
+        }
+        for (let bird of birds) {
+            // Bird in front or behind snowman
+            if (bird.depth) {
+                bird.update();
+            }
+        }
+        drawSnowman(new Vector(800, 600));
+
+        for (let bird of birds) {
+            if (!bird.depth)
+                bird.update();
+        }
+
+        for (let snowball of snowballs) {
+            snowball.update();
+        }
+
     }
 
     function drawBackground(): void {
@@ -311,53 +353,5 @@ namespace MyFuwa_last {
             moveable = new Snowflake(position);
             moveables.push(moveable);
         }
-    }
-
-    function handleClick(_event: MouseEvent): void {
-        let mousePosition: Vector = new Vector(_event.x, _event.y);
-        // create food at location
-        if (_event.shiftKey) {
-            let food: Food = new Food(mousePosition);
-            foods.push(food);
-        }
-        else {
-            let snowball: Snowball = new Snowball(mousePosition);
-            snowballs.push(snowball);
-            // for (let moveable of birds) {
-            //     if (moveable.isTrained)
-            //         moveable.changeTarget(mousePosition);
-            // }
-        }
-    }
-
-    function update(): void {
-        window.setTimeout(update, 1000 / fps);
-
-        crc2.clearRect(0, 0, canvas.width, canvas.height);
-        crc2.putImageData(image, 0, 0);
-        for (let moveable of moveables) {
-            moveable.update();
-        }
-        for (let food of foods) {
-            food.update();
-        }
-        for (let bird of birds) {
-            // Bird in front or behind birdhouse & snowman
-            if (bird.depth) {
-                bird.update();
-            }
-        }
-        // drawBirdhouse(new Vector(birdX, birdY), direction);
-        drawSnowman(new Vector(800, 600));
-
-        for (let bird of birds) {
-            if (!bird.depth)
-                bird.update();
-        }
-
-        for (let snowball of snowballs) {
-            snowball.update();
-        }
-
     }
 }
