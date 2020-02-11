@@ -51,7 +51,7 @@ namespace MyFuwa_last {
             // let deleter: number[] = [];
             for (let i: number = 0; i < birds.length; i++) {
                 if (this.isHitting(birds[i].getPosition)) {
-                    score += 5 + Math.floor(birds[i].velocity.length);
+                    score += 5 + 2 * Math.floor(birds[i].velocity.length);
                     birds.splice(i, 1);
                     // deleter.push(i);
                 }

@@ -1,0 +1,12 @@
+html {
+    background-color: rgb(101, 101, 101);
+    color: white;
+}
+
+button {
+    font-size: larger;
+}
+
+p {
+    line-height: 0.5rem;
+}

@@ -70,7 +70,7 @@ export namespace MyFuwa_last {
             }
         }
         let cursor: Mongo.Cursor = entries.find();
-        cursor.sort("score");    // not sorting
+        cursor.sort("score", -1);    // not sorting
         _response.end();
     }
 

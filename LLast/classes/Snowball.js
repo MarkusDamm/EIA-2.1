@@ -45,7 +45,7 @@ var MyFuwa_last;
             // let deleter: number[] = [];
             for (let i = 0; i < MyFuwa_last.birds.length; i++) {
                 if (this.isHitting(MyFuwa_last.birds[i].getPosition)) {
-                    MyFuwa_last.score += 5 + Math.floor(MyFuwa_last.birds[i].velocity.length);
+                    MyFuwa_last.score += 5 + 2 * Math.floor(MyFuwa_last.birds[i].velocity.length);
                     MyFuwa_last.birds.splice(i, 1);
                     // deleter.push(i);
                 }

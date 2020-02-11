@@ -6,20 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./canvas.js"></script>
-    <script src="./Vector.js"></script>
-    <script src="./Object.js"></script>
-    <script src="./Ghb.js"></script>
-    <script src="./Cloud.js"></script>
-    <script src="./Food.js"></script>
-    <script src="./Moveable.js"></script>
-    <script src="./Bird.js"></script>
-    <script src="./Snowflake.js"></script>
-    <script src="./Snowball.js"></script>
+    <script src="./classes/Vector.js"></script>
+    <script src="./classes/Object.js"></script>
+    <script src="./classes/Ghb.js"></script>
+    <script src="./classes/Cloud.js"></script>
+    <script src="./classes/Food.js"></script>
+    <script src="./classes/Moveable.js"></script>
+    <script src="./classes/Bird.js"></script>
+    <script src="./classes/Snowflake.js"></script>
+    <script src="./classes/Snowball.js"></script>
+
+    <link rel="stylesheet" href="./styles.css">
 
     <title>Final FuWa</title>
 </head>
 
 <body>
+    <h1>FurWariida</h1> <!-- Von https://en.wikipedia.org/wiki/Ovenbird_(family) -->
     <div class="start">
         <button>Start</button>
         <div class="highscore">
@@ -28,13 +31,13 @@
     </div>
 
     <div class="game">
-        <canvas width="1000" height="700"></canvas>
         <p>Click to throw snowballs, shift-click for food.</p>
         <p>5 Points for standing birds, +? Points for moving birds. Faster birds give more points! Snowballs cost 1 Point!</p>
         <div>
             <span>Score: </span>
             <span id="score">0</span>
         </div>
+        <canvas width="1000" height="700"></canvas>
     </div>
 
     <div class="end">

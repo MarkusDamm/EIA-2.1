@@ -14,7 +14,7 @@ namespace MyFuwa_last {
     export let snowballs: Snowball[] = [];
     let image: ImageData;
     export let fps: number = 30;
-    export let score: number = 0;
+    export let score: number;
     export let scoreElement: HTMLSpanElement;
 
     let startEle: HTMLDivElement;
@@ -34,6 +34,7 @@ namespace MyFuwa_last {
         endEle = <HTMLDivElement>document.querySelector("div.end");
         scoreboard = <HTMLDivElement>document.querySelector("div.highscore");
 
+        score = 0;
         loadHighscore();
 
         startEle.style.display = "initial";
@@ -171,7 +172,10 @@ namespace MyFuwa_last {
         let responseText: string = await response.text();
         let parsedJson: any[] = JSON.parse(responseText);
         let output: HTMLDivElement = document.createElement("div");
-        
+        let heading: HTMLParagraphElement = document.createElement("h2");
+        heading.innerText = "Highscore!";
+        output.appendChild(heading);
+
         for (let entry of parsedJson) {
             let paragraph: HTMLParagraphElement = document.createElement("p");
             paragraph.innerText = entry.name + ": " + entry.score + " Punkte";
