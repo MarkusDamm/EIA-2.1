@@ -57,6 +57,8 @@ var MyFuwa_last;
                 console.log(jsonString);
             }
         }
+        let cursor = await entries.find();
+        cursor.sort("score");
         _response.end();
     }
     async function retrieveEntries() {
@@ -71,8 +73,12 @@ var MyFuwa_last;
             return "We encountered tecnical problems. Please try again later";
     }
     function storeEntry(_entry) {
-        console.log(_entry);
-        entries.insert(_entry);
+        console.log("See entry: ");
+        console.log({ name: _entry[name], score: Number(_entry[score]) });
+        console.log("Entry[Score] is ");
+        console.log(_entry[score]);
+        // entries.insertOne(_entry);
+        entries.insertOne({ name: _entry[name], score: Number(_entry[score]) });
         // seperate _entry for name and score (score as number)
     }
 })(MyFuwa_last = exports.MyFuwa_last || (exports.MyFuwa_last = {}));

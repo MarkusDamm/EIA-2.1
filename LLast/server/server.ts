@@ -69,6 +69,8 @@ export namespace MyFuwa_last {
                 console.log(jsonString);
             }
         }
+        let cursor: Mongo.Cursor = await entries.find();
+        cursor.sort("score");
         _response.end();
     }
 
@@ -85,8 +87,12 @@ export namespace MyFuwa_last {
     }
 
     function storeEntry(_entry: Entry): void {
-        console.log(_entry);
-        entries.insert(_entry);
+        console.log("See entry: ");
+        console.log({ name: _entry[name], score: Number(_entry[score]) });
+        console.log("Entry[Score] is ");
+        console.log(_entry[score]);
+        // entries.insertOne(_entry);
+        entries.insertOne({ name: _entry[name], score: Number(_entry[score]) });
         // seperate _entry for name and score (score as number)
     }
 }

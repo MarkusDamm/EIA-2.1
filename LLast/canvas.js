@@ -31,6 +31,7 @@ var MyFuwa_last;
         MyFuwa_last.scoreElement = document.querySelector("span#score");
         MyFuwa_last.scoreElement.innerText = MyFuwa_last.score.toString();
         document.querySelector("button").addEventListener("click", handleStart);
+        document.querySelector("div.end > button").addEventListener("click", handleStart);
     }
     function handleStart() {
         startEle.style.display = "none";

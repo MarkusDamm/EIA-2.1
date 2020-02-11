@@ -42,6 +42,7 @@ namespace MyFuwa_last {
         scoreElement.innerText = score.toString();
 
         document.querySelector("button").addEventListener("click", handleStart);
+        document.querySelector("div.end > button").addEventListener("click", handleStart);
     }
 
     function handleStart(): void {
