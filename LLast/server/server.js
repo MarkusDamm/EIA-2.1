@@ -5,10 +5,10 @@ const Url = require("url");
 const Mongo = require("mongodb");
 var MyFuwa_last;
 (function (MyFuwa_last) {
-    let orders;
+    let entries;
     let databaseURL;
-    let dbName = "FirstFantasy";
-    let dbCollection = "Characters";
+    let dbName = "EIA_2-1";
+    let dbCollection = "FuWaScore";
     if (process.argv[2] == "remote") {
         databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";
     }
@@ -30,8 +30,8 @@ var MyFuwa_last;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db(dbName).collection(dbCollection);
-        console.log("Database connection is ", orders != undefined);
+        entries = mongoClient.db(dbName).collection(dbCollection);
+        console.log("Database 2.1 connection is ", entries != undefined);
     }
     async function handleRequest(_request, _response) {
         console.log("What's up?");
@@ -43,7 +43,7 @@ var MyFuwa_last;
             //     _response.write(key + ":" + url.query[key] + "<br/>");
             // }
             if (url.query["command"] == "retrieve") {
-                let report = await retrieveOrders();
+                let report = await retrieveEntries();
                 if (report == "We encountered tecnical problems. Please try again later")
                     _response.write(report);
                 else
@@ -53,15 +53,15 @@ var MyFuwa_last;
                 console.log("urlQuery: ", url.query);
                 let jsonString = JSON.stringify(url.query);
                 _response.write(jsonString);
-                storeOrder(url.query);
+                storeEntry(url.query);
                 console.log(jsonString);
             }
         }
         _response.end();
     }
-    async function retrieveOrders() {
-        // console.log("Asking DB about Orders ", orders.find());
-        let cursor = await orders.find();
+    async function retrieveEntries() {
+        // console.log("Asking DB about entries ", entries.find());
+        let cursor = await entries.find();
         let answer = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {
@@ -70,8 +70,10 @@ var MyFuwa_last;
         else
             return "We encountered tecnical problems. Please try again later";
     }
-    function storeOrder(_order) {
-        orders.insert(_order);
+    function storeEntry(_entry) {
+        console.log(_entry);
+        entries.insert(_entry);
+        // seperate _entry for name and score (score as number)
     }
 })(MyFuwa_last = exports.MyFuwa_last || (exports.MyFuwa_last = {}));
 //# sourceMappingURL=server.js.map

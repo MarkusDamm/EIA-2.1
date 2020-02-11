@@ -21,7 +21,7 @@ var MyFuwa_last;
                 else
                     this.xInverted = 1;
                 this.isInvoked = false;
-                console.log("Zielen");
+                // console.log("Zielen");
             };
             this.changePecking = () => {
                 if (!this.isPecking) {

@@ -3,7 +3,7 @@ var MyFuwa_last;
 (function (MyFuwa_last) {
     console.log("Waiting on load");
     window.addEventListener("load", handleLoad);
-    // let url: string = "https://fuwa-eia2-1.herokuapp.com/";
+    let url = "https://fuwa-eia2-1.herokuapp.com/";
     let moveable;
     let moveables = [];
     MyFuwa_last.birds = [];
@@ -12,11 +12,30 @@ var MyFuwa_last;
     let image;
     MyFuwa_last.fps = 30;
     MyFuwa_last.score = 0;
+    let startEle;
+    let gameEle;
+    let endEle;
+    let scoreboard;
     let birdX;
     let birdY;
     let direction;
-    function handleLoad(_event) {
+    function handleLoad() {
+        startEle = document.querySelector("div.start");
+        gameEle = document.querySelector("div.game");
+        endEle = document.querySelector("div.end");
+        scoreboard = document.querySelector("div.highscore");
+        loadHighscore();
+        gameEle.style.display = "none";
+        endEle.style.display = "none";
         console.log("Start now");
+        MyFuwa_last.scoreElement = document.querySelector("span#score");
+        MyFuwa_last.scoreElement.innerText = MyFuwa_last.score.toString();
+        document.querySelector("button").addEventListener("click", handleStart);
+    }
+    function handleStart() {
+        startEle.style.display = "none";
+        gameEle.style.display = "initial";
+        endEle.style.display = "none";
         MyFuwa_last.canvas = document.querySelector("canvas");
         if (MyFuwa_last.canvas.getContext("2d"))
             MyFuwa_last.crc2 = MyFuwa_last.canvas.getContext("2d");
@@ -51,7 +70,7 @@ var MyFuwa_last;
         }
         // console.log(moveables);
         MyFuwa_last.canvas.addEventListener("click", handleClick);
-        window.setTimeout(update, 1000);
+        window.setInterval(update, 1000 / MyFuwa_last.fps);
     }
     function handleClick(_event) {
         let mousePosition = new MyFuwa_last.Vector(_event.offsetX, _event.offsetY);
@@ -65,7 +84,7 @@ var MyFuwa_last;
         }
     }
     function update() {
-        window.setTimeout(update, 1000 / MyFuwa_last.fps);
+        // window.setTimeout(update, 1000 / fps);
         MyFuwa_last.crc2.clearRect(0, 0, MyFuwa_last.canvas.width, MyFuwa_last.canvas.height);
         MyFuwa_last.crc2.putImageData(image, 0, 0);
         for (let moveable of moveables) {
@@ -88,6 +107,36 @@ var MyFuwa_last;
         for (let snowball of MyFuwa_last.snowballs) {
             snowball.update();
         }
+    }
+    function endGame() {
+        scoreboard = document.querySelector("div.end > div.highscore");
+        startEle.style.display = "none";
+        gameEle.style.display = "none";
+        endEle.style.display = "initial";
+        let username = prompt("Your score: " + MyFuwa_last.score + ". Enter your name!");
+        if (username === null || username == "")
+            endGame();
+        else
+            sendPlayerScore(username);
+    }
+    MyFuwa_last.endGame = endGame;
+    async function sendPlayerScore(_username) {
+        // let query: URLSearchParams = new URLSearchParams(<any>formData);
+        let query = "name=" + _username + "&score=" + MyFuwa_last.score.toString();
+        console.log(query);
+        let response = await fetch(url + "?" + query.toString());
+        let responseText = await response.text();
+        // alert(responseText);
+        console.log(responseText);
+        loadHighscore();
+    }
+    async function loadHighscore() {
+        console.log("Trying to get Highscore");
+        let query = "command=retrieve";
+        let response = await fetch(url + "?" + query);
+        let responseText = await response.text();
+        // alert(responseText);
+        scoreboard.innerText = responseText;
     }
     function drawBackground() {
         let gradient = MyFuwa_last.crc2.createLinearGradient(0, 0, 0, MyFuwa_last.canvas.height);

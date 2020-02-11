@@ -5,7 +5,7 @@ namespace MyFuwa_last {
     export let crc2: CanvasRenderingContext2D;
     export let birdHousePolePosition: Vector;
 
-    // let url: string = "https://fuwa-eia2-1.herokuapp.com/";
+    let url: string = "https://fuwa-eia2-1.herokuapp.com/";
 
     let moveable: Moveable;
     let moveables: Moveable[] = [];
@@ -15,13 +15,40 @@ namespace MyFuwa_last {
     let image: ImageData;
     export let fps: number = 30;
     export let score: number = 0;
+    export let scoreElement: HTMLSpanElement;
+
+    let startEle: HTMLDivElement;
+    let gameEle: HTMLDivElement;
+    let endEle: HTMLDivElement;
+    let scoreboard: HTMLDivElement;
 
     let birdX: number;
     let birdY: number;
     let direction: number;
 
-    function handleLoad(_event?: Event): void {
+    function handleLoad(): void {
+        startEle = <HTMLDivElement>document.querySelector("div.start");
+        gameEle = <HTMLDivElement>document.querySelector("div.game");
+        endEle = <HTMLDivElement>document.querySelector("div.end");
+        scoreboard = <HTMLDivElement>document.querySelector("div.highscore");
+
+        loadHighscore();
+
+        gameEle.style.display = "none";
+        endEle.style.display = "none";
+
         console.log("Start now");
+        scoreElement = <HTMLSpanElement>document.querySelector("span#score");
+        scoreElement.innerText = score.toString();
+
+        document.querySelector("button").addEventListener("click", handleStart);
+    }
+
+    function handleStart(): void {
+        startEle.style.display = "none";
+        gameEle.style.display = "initial";
+        endEle.style.display = "none";
+
         canvas = <HTMLCanvasElement>document.querySelector("canvas");
         if (canvas.getContext("2d"))
             crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
@@ -62,7 +89,7 @@ namespace MyFuwa_last {
         // console.log(moveables);
 
         canvas.addEventListener("click", handleClick);
-        window.setTimeout(update, 1000);
+        window.setInterval(update, 1000 / fps);
     }
 
     function handleClick(_event: MouseEvent): void {
@@ -78,7 +105,7 @@ namespace MyFuwa_last {
     }
 
     function update(): void {
-        window.setTimeout(update, 1000 / fps);
+        // window.setTimeout(update, 1000 / fps);
 
         crc2.clearRect(0, 0, canvas.width, canvas.height);
         crc2.putImageData(image, 0, 0);
@@ -105,6 +132,40 @@ namespace MyFuwa_last {
             snowball.update();
         }
 
+    }
+
+    export function endGame(): void {
+        scoreboard = <HTMLDivElement>document.querySelector("div.end > div.highscore");
+
+        startEle.style.display = "none";
+        gameEle.style.display = "none";
+        endEle.style.display = "initial";
+
+        let username: string | null = prompt("Your score: " + score + ". Enter your name!");
+        if (username === null || username == "") endGame();
+        else    sendPlayerScore(username);
+    }
+
+    async function sendPlayerScore(_username: string): Promise<void> {
+        // let query: URLSearchParams = new URLSearchParams(<any>formData);
+        let query: string = "name=" + _username + "&score=" + score.toString();
+        console.log(query);
+        let response: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response.text();
+
+        // alert(responseText);
+        console.log(responseText);
+        loadHighscore();
+    }
+
+    async function loadHighscore(): Promise<void> {
+        console.log("Trying to get Highscore");
+        let query: string = "command=retrieve";
+        let response: Response = await fetch(url + "?" + query);
+        let responseText: string = await response.text();
+
+        // alert(responseText);
+        scoreboard.innerText = responseText;
     }
 
     function drawBackground(): void {

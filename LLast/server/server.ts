@@ -3,14 +3,14 @@ import * as Url from "url";
 import * as Mongo from "mongodb";
 
 export namespace MyFuwa_last {
-    interface Order {
-        [type: string]: string | string[];
+    interface Entry {
+        [type: string]: string | string[] | number;
     }
-    let orders: Mongo.Collection;
+    let entries: Mongo.Collection;
     let databaseURL: string;
 
-    let dbName: string = "FirstFantasy";
-    let dbCollection: string = "Characters";
+    let dbName: string = "EIA_2-1";
+    let dbCollection: string = "FuWaScore";
 
     if (process.argv[2] == "remote") {
         databaseURL = "mongodb+srv://anyUser:anyPassword@clusterfuwa-pmutc.mongodb.net/test?retryWrites=true&w=majority";
@@ -38,8 +38,8 @@ export namespace MyFuwa_last {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db(dbName).collection(dbCollection);
-        console.log("Database connection is ", orders != undefined);
+        entries = mongoClient.db(dbName).collection(dbCollection);
+        console.log("Database 2.1 connection is ", entries != undefined);
     }
 
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
@@ -55,7 +55,7 @@ export namespace MyFuwa_last {
             // }
 
             if (url.query["command"] == "retrieve") {
-                let report: any[] | string = await retrieveOrders();
+                let report: any[] | string = await retrieveEntries();
                 if (report == "We encountered tecnical problems. Please try again later")
                     _response.write(report);
                 else
@@ -65,16 +65,16 @@ export namespace MyFuwa_last {
                 console.log("urlQuery: ", url.query);
                 let jsonString: string = JSON.stringify(url.query);
                 _response.write(jsonString);
-                storeOrder(url.query);
+                storeEntry(url.query);
                 console.log(jsonString);
             }
         }
         _response.end();
     }
 
-    async function retrieveOrders(): Promise<any[] | string> {
-        // console.log("Asking DB about Orders ", orders.find());
-        let cursor: Mongo.Cursor = await orders.find();
+    async function retrieveEntries(): Promise<any[] | string> {
+        // console.log("Asking DB about entries ", entries.find());
+        let cursor: Mongo.Cursor = await entries.find();
         let answer: Promise<any[]> = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {
@@ -84,7 +84,9 @@ export namespace MyFuwa_last {
             return "We encountered tecnical problems. Please try again later";
     }
 
-    function storeOrder(_order: Order): void {
-        orders.insert(_order);
+    function storeEntry(_entry: Entry): void {
+        console.log(_entry);
+        entries.insert(_entry);
+        // seperate _entry for name and score (score as number)
     }
 }

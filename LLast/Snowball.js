@@ -3,7 +3,9 @@ var MyFuwa_last;
 (function (MyFuwa_last) {
     class Snowball extends MyFuwa_last.Moveable {
         constructor(_position) {
-            MyFuwa_last.score--;
+            if (MyFuwa_last.score > 0)
+                MyFuwa_last.score--;
+            MyFuwa_last.scoreElement.innerText = MyFuwa_last.score.toString();
             super(_position);
             this.size = 40;
             this.current = new MyFuwa_last.Vector(MyFuwa_last.canvas.width, MyFuwa_last.canvas.height);
@@ -40,18 +42,23 @@ var MyFuwa_last;
                 return false;
         }
         impact() {
-            let deleter = [];
+            // let deleter: number[] = [];
             for (let i = 0; i < MyFuwa_last.birds.length; i++) {
                 if (this.isHitting(MyFuwa_last.birds[i].getPosition)) {
                     MyFuwa_last.score += 5 + Math.floor(MyFuwa_last.birds[i].velocity.length);
-                    deleter.push(i);
+                    MyFuwa_last.birds.splice(i, 1);
+                    // deleter.push(i);
                 }
             }
-            for (let j = deleter.length - 1; j < 0; j--) {
-                MyFuwa_last.birds.splice(deleter[j], 1); // Um zu verhindern, dass Vögel bei der oberen Schleife übersprungen werden
-            }
+            // for (let j: number = deleter.length - 1; j < 0; j--) {
+            //     birds.splice(deleter[j], 1);    // Um zu verhindern, dass Vögel bei der oberen Schleife übersprungen werden
+            // }
             MyFuwa_last.snowballs.shift();
-            // console.log(birds);
+            MyFuwa_last.scoreElement.innerText = MyFuwa_last.score.toString();
+            if (MyFuwa_last.birds.length <= 0) {
+                MyFuwa_last.endGame();
+            }
+            // console.log(birds.length);
         }
     }
     MyFuwa_last.Snowball = Snowball;
