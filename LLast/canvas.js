@@ -138,8 +138,13 @@ var MyFuwa_last;
         let query = "command=retrieve";
         let response = await fetch(url + "?" + query);
         let responseText = await response.text();
+        let parsedJson = JSON.parse(responseText);
+        let output = "";
+        for (let entry of parsedJson) {
+            output += entry.name + " " + entry.score;
+        }
         // alert(responseText);
-        scoreboard.innerText = responseText;
+        scoreboard.innerText = output;
     }
     function drawBackground() {
         let gradient = MyFuwa_last.crc2.createLinearGradient(0, 0, 0, MyFuwa_last.canvas.height);

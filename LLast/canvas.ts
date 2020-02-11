@@ -168,9 +168,15 @@ namespace MyFuwa_last {
         let query: string = "command=retrieve";
         let response: Response = await fetch(url + "?" + query);
         let responseText: string = await response.text();
+        let parsedJson: any[] = JSON.parse(responseText);
+        let output: string = "";
+        
+        for (let entry of parsedJson) {
+            output += entry.name + " " + entry.score;
+        }
 
         // alert(responseText);
-        scoreboard.innerText = responseText;
+        scoreboard.innerText = output;
     }
 
     function drawBackground(): void {
