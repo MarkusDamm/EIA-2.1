@@ -74,11 +74,11 @@ var MyFuwa_last;
     }
     function storeEntry(_entry) {
         console.log("See entry: ");
-        console.log({ name: _entry[name], score: Number(_entry[score]) });
+        console.log({ name: _entry["name"], score: Number(_entry["score"]) });
         console.log("Entry[Score] is ");
-        console.log(_entry[score]);
+        console.log(_entry["score"]);
         // entries.insertOne(_entry);
-        entries.insertOne({ name: _entry[name], score: Number(_entry[score]) });
+        entries.insertOne({ name: _entry["name"], score: Number(_entry["score"]) });
         // seperate _entry for name and score (score as number)
     }
 })(MyFuwa_last = exports.MyFuwa_last || (exports.MyFuwa_last = {}));
