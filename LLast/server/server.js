@@ -58,7 +58,7 @@ var MyFuwa_last;
             }
         }
         let cursor = entries.find();
-        cursor.sort("score", -1); // not sorting
+        cursor.sort({ score: -1 }); // not sorting
         _response.end();
     }
     async function retrieveEntries() {
