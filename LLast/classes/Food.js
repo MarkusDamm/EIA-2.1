@@ -1,7 +1,7 @@
 "use strict";
 var MyFuwa_last;
 (function (MyFuwa_last) {
-    class Food extends MyFuwa_last.Object {
+    class Food extends MyFuwa_last.Thing {
         constructor(_position) {
             super(_position);
             this.bait();
