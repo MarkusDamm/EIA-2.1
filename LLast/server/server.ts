@@ -55,7 +55,7 @@ export namespace MyFuwa_last {
             // }
 
             if (url.query["command"] == "retrieve") {
-                let report: string[] | string = await retrieveEntries();
+                let report: any[] | string = await retrieveEntries();
                 if (report == "We encountered tecnical problems. Please try again later")
                     _response.write(report);
                 else
@@ -75,11 +75,11 @@ export namespace MyFuwa_last {
         _response.end();
     }
 // Coded by Markus Damm
-    async function retrieveEntries(): Promise<string[] | string> {
+    async function retrieveEntries(): Promise<any[] | string> {
         // console.log("Asking DB about entries ", entries.find());
         let cursor: Mongo.Cursor = await entries.find();
-        cursor.sort("score", -1);
-        let answer: Promise<string[]> = await cursor.toArray();
+        cursor = cursor.sort("score", -1);
+        let answer: Promise<any[]> = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {
             return answer;
