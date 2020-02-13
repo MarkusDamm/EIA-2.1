@@ -23,11 +23,11 @@ namespace MyFuwa_last {
             }
         }
 
-        protected move(): void {
+        private move(): void {
             this.current.add(this.velocity);
         }
 
-        protected draw(): void {
+        private draw(): void {
             crc2.save();
             crc2.translate(this.current.x, this.current.y);
             crc2.beginPath();

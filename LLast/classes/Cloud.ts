@@ -1,5 +1,5 @@
 namespace MyFuwa_last {
-    export class Cloud extends Thing {
+    export class Cloud extends Object {
         size: Vector;
         nParticles: number = 40;
         rParticle: number = 50;
@@ -14,7 +14,7 @@ namespace MyFuwa_last {
             this.draw();
         }
 
-        protected draw(): void {
+        private draw(): void {
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, this.rParticle);
 
             this.particle.arc(0, 0, this.rParticle, 0, 2 * Math.PI);
