@@ -65,7 +65,7 @@ var MyFuwa_last;
     async function retrieveEntries() {
         // console.log("Asking DB about entries ", entries.find());
         let cursor = await entries.find();
-        cursor.sort("score", -1);
+        cursor = cursor.sort("score", -1);
         let answer = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {
