@@ -1,5 +1,5 @@
 namespace MyFuwa_last {
-    export class Food extends Object {
+    export class Food extends Thing {
         private lifetime: number;
 
         constructor(_position: Vector) {
@@ -17,7 +17,7 @@ namespace MyFuwa_last {
                 this.draw();
             }
         }
-        private draw(): void {
+        protected draw(): void {
             // 2 versions depending on y-position, ground and hanging
             crc2.save();
             crc2.translate(this.position.x, this.position.y);

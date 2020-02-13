@@ -1,12 +1,12 @@
 namespace MyFuwa_last {
-    export class Ghb extends Object {
+    export class Ghb extends Thing {
         // Drawn by Markus Damm
         constructor(_position: Vector) {
             super(_position);
             this.draw();
         }
 
-        private draw(): void {
+        protected draw(): void {
             // console.log("Mal GHB");
             crc2.save();
             crc2.translate(this.position.x, this.position.y);

@@ -45,8 +45,8 @@ namespace MyFuwa_last {
         scoreElement = <HTMLSpanElement>document.querySelector("span#score");
         scoreElement.innerText = score.toString();
 
-        document.querySelector("button").addEventListener("click", handleStart);
-        document.querySelector("div.end > button").addEventListener("click", handleLoad);
+        (<HTMLButtonElement>document.querySelector("button")).addEventListener("click", handleStart);
+        (<HTMLButtonElement>document.querySelector("div.end > button")).addEventListener("click", handleLoad);
     }
 
     function handleStart(): void {
@@ -63,7 +63,7 @@ namespace MyFuwa_last {
         }
         else {
             crc2.strokeStyle = "black";
-            let object: Object;
+            let object: Thing;
             drawBackground();
             drawSun(new Vector(980, 20));
             drawMountains(new Vector(0, 500), 70, 170);

@@ -1,7 +1,7 @@
 "use strict";
 var MyFuwa_last;
 (function (MyFuwa_last) {
-    class Cloud extends MyFuwa_last.Object {
+    class Cloud extends MyFuwa_last.Thing {
         constructor(_position, _size) {
             super(_position);
             this.nParticles = 40;

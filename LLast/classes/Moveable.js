@@ -1,7 +1,7 @@
 "use strict";
 var MyFuwa_last;
 (function (MyFuwa_last) {
-    class Moveable extends MyFuwa_last.Object {
+    class Moveable extends MyFuwa_last.Thing {
         // Coded by Markus Damm
         update() {
             this.move();

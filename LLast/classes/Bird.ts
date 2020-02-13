@@ -90,7 +90,7 @@ namespace MyFuwa_last {
             return this.position;
         }
         
-        private draw(): void {
+        protected draw(): void {
             // console.log("Draw Bird");
             crc2.save();
             crc2.translate(this.position.x, this.position.y);

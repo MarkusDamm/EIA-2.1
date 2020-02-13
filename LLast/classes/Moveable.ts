@@ -1,5 +1,5 @@
 namespace MyFuwa_last {
-    export abstract class Moveable extends Object {
+    export abstract class Moveable extends Thing {
         velocity: Vector;
         // Coded by Markus Damm
         public update(): void {
@@ -7,7 +7,7 @@ namespace MyFuwa_last {
             this.draw();
         }
 
-        private move(): void {
+        protected move(): void {
             this.position.add(this.velocity);
             if (this.position.x >= canvas.width + 60) {
                 this.position.x = - 50;
