@@ -1,7 +1,7 @@
 "use strict";
 var MyFuwa_last;
 (function (MyFuwa_last) {
-    class Ghb extends MyFuwa_last.Thing {
+    class Ghb extends MyFuwa_last.Object {
         // Drawn by Markus Damm
         constructor(_position) {
             super(_position);

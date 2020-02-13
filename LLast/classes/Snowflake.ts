@@ -10,7 +10,7 @@ namespace MyFuwa_last {
             this.draw();
         }
 
-        protected draw(): void {
+        private draw(): void {
             crc2.save();
 
             crc2.beginPath();
